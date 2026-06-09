@@ -81,6 +81,18 @@ export function Footer() {
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 text-xs text-muted-foreground sm:flex-row">
           <p>© {new Date().getFullYear()} Filizat Metals. All rights reserved.</p>
           <p>Crafted with precision.</p>
+          <p>
+            Developed by{" "}
+            <a
+              href="https://zyradigitals.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground hover:underline transition-colors"
+            >
+              Zyra Digitals
+            </a>
+            .
+          </p>
         </div>
       </div>
     </footer>

@@ -146,7 +146,7 @@ function Hero() {
 /* ---------------- Video Section ---------------- */
 function VideoSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
 
   const toggleMute = () => {
@@ -187,7 +187,6 @@ function VideoSection() {
             ref={videoRef}
             src={videoAsset}
             autoPlay
-            muted
             loop
             playsInline
             className="h-full w-full object-cover"

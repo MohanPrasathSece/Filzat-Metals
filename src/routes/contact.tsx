@@ -83,6 +83,7 @@ function ContactMain() {
           <ul className="mt-8 space-y-6">
             {[
               { icon: Phone, label: "Phone", value: "+91 70601 81694" },
+              { icon: Phone, label: "Phone 2", value: "+91 94525 30493" },
               { icon: Mail, label: "Email", value: "hello@filizatmetals.com" },
               {
                 icon: MapPin,

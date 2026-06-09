@@ -52,9 +52,9 @@ export function Navbar({ darkHero = false }: { darkHero?: boolean }) {
           scrolled ? "glass shadow-soft" : "bg-transparent"
         }`}
       >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 lg:px-10">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-10">
           <Link to="/" className="flex items-center gap-2" onClick={() => handleLinkClick("/")}>
-            <img src={logoImg} alt="Filizat Metals" className="h-14 w-auto" />
+            <img src={logoImg} alt="Filizat Metals" className="h-20 w-auto" />
           </Link>
 
           <ul className="hidden items-center gap-9 lg:flex">
@@ -158,8 +158,8 @@ export function Navbar({ darkHero = false }: { darkHero?: boolean }) {
               }}
             >
               {/* Modal Header */}
-              <div className="flex items-center justify-between border-b border-border/50 px-6 py-3">
-                <img src={logoImg} alt="Filizat Metals" className="h-12 w-auto" />
+              <div className="flex items-center justify-between border-b border-border/50 px-6 py-4">
+                <img src={logoImg} alt="Filizat Metals" className="h-16 w-auto" />
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"

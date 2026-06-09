@@ -89,9 +89,10 @@ export function Footer() {
               </button>
             </form>
             <div className="mt-6 space-y-1 text-xs text-muted-foreground">
-              <p>+91 98765 43210</p>
+              <p>+91 70601 81694</p>
               <p>hello@filizatmetals.com</p>
-              <p>Aligarh · Uttar Pradesh · India</p>
+              <p>E 303 Central Tower, Kela Nagar Chauraha,</p>
+              <p>Aligarh, Uttar Pradesh 202001, India</p>
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   useEffect(() => {
-    document.title = "About Filizat Metals — Generations of Sourcing Excellence";
+    document.title = "About Filizat Metals - Generations of Sourcing Excellence";
   }, []);
 
   const pillars = [

@@ -28,7 +28,7 @@ export const Route = createFileRoute("/sustainability")({
 
 function SustainabilityPage() {
   useEffect(() => {
-    document.title = "Sustainability Blueprint — Filizat Metals — Circular & Ethical Metallurgy";
+    document.title = "Sustainability Blueprint - Filizat Metals - Circular & Ethical Metallurgy";
   }, []);
 
   const offerings = [
@@ -45,7 +45,7 @@ function SustainabilityPage() {
       icon: Recycle,
       title: "Brass Alloy",
       subtitle: "Closed-Loop Circular Economy",
-      desc: "Our approach to brass—a crucial copper-zinc alloy—centers on a closed-loop circular economy. By utilizing high ratios of recycled scrap metal, we minimize the necessity of destructive mining, preserving vital terrestrial habitats and ecosystems.",
+      desc: "Our approach to brass - a crucial copper-zinc alloy - centers on a closed-loop circular economy. By utilizing high ratios of recycled scrap metal, we minimize the necessity of destructive mining, preserving vital terrestrial habitats and ecosystems.",
       image: brassImg,
       badge: "100% Closed-Loop",
       badgeColor: "bg-amber-500/10 text-amber-600 border-amber-500/20",

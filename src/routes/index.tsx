@@ -17,7 +17,7 @@ import {
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { categories } from "@/lib/products-data";
-import heroImg from "@/assets/cta-metal-bg.png";
+import heroImg from "@/assets/herobg.png";
 import facilityImg from "@/assets/about-facility.jpg";
 import sustainImg from "@/assets/sustainability.jpg";
 import ctaBg from "@/assets/cta-metal-bg.png";
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   useEffect(() => {
-    document.title = "Filizat Metals — Generations of Sourcing Excellence";
+    document.title = "Filizat Metals - Generations of Sourcing Excellence";
   }, []);
   return (
     <div className="overflow-x-hidden bg-background">
@@ -65,12 +65,14 @@ function Hero() {
       <motion.div style={{ y }} className="absolute inset-0">
         <img
           src={heroImg}
-          alt="Brushed silver metal surface — Filizat Metals"
-          className="h-full w-full object-cover object-center scale-110"
+          alt="Filizat Metals - premium metal solutions"
+          className="h-full w-full object-cover object-center"
           width={1920}
           height={1080}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/10 to-white" />
+        {/* White overlay */}
+        <div className="absolute inset-0 bg-white/25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
       </motion.div>
 
       <motion.div
@@ -104,7 +106,7 @@ function Hero() {
           className="mx-auto mt-7 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg"
         >
           Delivering high-quality metal products with precision, innovation and environmental
-          responsibility — for the industries that build tomorrow.
+          responsibility, for the industries that build tomorrow.
         </motion.p>
 
         <motion.div
@@ -193,7 +195,7 @@ function VideoSection() {
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-500" />
 
-          {/* Video Controls — always visible on mobile, hover-only on desktop */}
+          {/* Video Controls - always visible on mobile, hover-only on desktop */}
           <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex gap-2 sm:gap-3 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
             {/* Play/Pause Button */}
             <button
@@ -372,7 +374,7 @@ function ProductShowcase() {
             Engineered for industries that demand precision.
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Seven categories. Twenty-plus refined materials and components — all held to a single
+            Seven categories. Twenty-plus refined materials and components, all held to a single
             uncompromising standard.
           </p>
         </div>
@@ -553,7 +555,7 @@ function SustainabilityPreview() {
               </h2>
               <p className="mt-6 max-w-md text-base leading-relaxed text-white/85">
                 Recycling, responsible sourcing and sustainable manufacturing aren't side
-                initiatives — they're how we build every product.
+                initiatives - they're how we build every product.
               </p>
               <Link
                 to="/sustainability"
@@ -665,7 +667,7 @@ function Testimonials() {
               <blockquote className="font-display text-xl font-medium leading-snug tracking-tight text-foreground sm:text-2xl md:text-3xl">
                 "{r.q}"
               </blockquote>
-              <div className="mt-6 text-sm text-muted-foreground">— {r.a}</div>
+              <div className="mt-6 text-sm text-muted-foreground">- {r.a}</div>
             </motion.div>
           ))}
         </div>

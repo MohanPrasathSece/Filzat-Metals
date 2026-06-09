@@ -197,7 +197,7 @@ export const categories: Category[] = [
     id: "aluminium",
     name: "Aluminium",
     image: aluminiumImg,
-    tagline: "From recycled briquettes to extrusion billets — built for scale.",
+    tagline: "From recycled briquettes to extrusion billets - built for scale.",
     products: [
       {
         id: "aluminium-scrap-briquettes",

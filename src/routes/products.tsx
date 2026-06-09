@@ -16,7 +16,7 @@ export const Route = createFileRoute("/products")({
 function ProductsPage() {
   const [active, setActive] = useState<Product | null>(null);
   useEffect(() => {
-    document.title = "Products — Premium Metal Solutions | Filizat Metals";
+    document.title = "Products - Premium Metal Solutions | Filizat Metals";
   }, []);
   return (
     <div className="overflow-x-hidden bg-background">
@@ -77,7 +77,7 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
-          High-quality metals, alloys, raw materials and industrial components — delivered with
+          High-quality metals, alloys, raw materials and industrial components - delivered with
           precision, reliability and sustainability.
         </motion.p>
         <motion.div

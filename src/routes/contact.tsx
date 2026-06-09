@@ -12,7 +12,7 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   useEffect(() => {
-    document.title = "Contact Filizat Metals — Let's Start a Conversation";
+    document.title = "Contact Filizat Metals - Let's Start a Conversation";
   }, []);
   return (
     <div className="overflow-x-hidden bg-background">
@@ -56,7 +56,7 @@ function ContactHero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
-          We're here to answer your questions and discuss your metal requirements — from spec sheets
+          We're here to answer your questions and discuss your metal requirements - from spec sheets
           to global delivery.
         </motion.p>
       </div>
@@ -82,14 +82,14 @@ function ContactMain() {
 
           <ul className="mt-8 space-y-6">
             {[
-              { icon: Phone, label: "Phone", value: "+91 98765 43210" },
+              { icon: Phone, label: "Phone", value: "+91 70601 81694" },
               { icon: Mail, label: "Email", value: "hello@filizatmetals.com" },
               {
                 icon: MapPin,
                 label: "Address",
-                value: "GT Road, Near Industrial Area, Aligarh 202001, Uttar Pradesh, India",
+                value: "E 303 Central Tower, Kela Nagar Chauraha, Aligarh, Uttar Pradesh 202001, India",
               },
-              { icon: Clock, label: "Working Hours", value: "Mon – Sat · 9:00 AM – 7:00 PM IST" },
+              { icon: Clock, label: "Working Hours", value: "Mon - Sat  9:00 AM - 7:00 PM IST" },
             ].map((c) => (
               <li key={c.label} className="flex items-start gap-4">
                 <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl silver-gradient shadow-soft">
@@ -157,7 +157,7 @@ function ContactForm() {
         type="submit"
         className="group mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:scale-[1.03] hover:shadow-elevated"
       >
-        {sent ? "Thank you — we'll be in touch" : "Send Message"}
+        {sent ? "Thank you - we'll be in touch" : "Send Message"}
         <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
       </button>
     </form>
@@ -194,10 +194,10 @@ function Field({
 
 function QuickCards() {
   const cards = [
-    { icon: Phone, t: "Call Us", d: "+91 98765 43210" },
+    { icon: Phone, t: "Call Us", d: "+91 70601 81694" },
     { icon: Mail, t: "Email Us", d: "hello@filizatmetals.com" },
     { icon: ArrowRight, t: "Request Quote", d: "Fast turnaround in 24h" },
-    { icon: MapPin, t: "Visit Us", d: "Aligarh · India" },
+    { icon: MapPin, t: "Visit Us", d: "Aligarh, Uttar Pradesh" },
   ];
   return (
     <section className="bg-secondary/40 py-20">
@@ -238,7 +238,7 @@ function MapSection() {
         >
           <iframe
             title="Filizat Metals location"
-            src="https://www.google.com/maps?q=Aligarh,Uttar+Pradesh,India&output=embed"
+            src="https://www.google.com/maps?q=E+303+Central+Tower+Kela+Nagar+Chauraha+Aligarh+Uttar+Pradesh+202001+India&output=embed"
             className="h-[460px] w-full grayscale-[40%]"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -253,7 +253,7 @@ function FAQ() {
   const items = [
     {
       q: "Do you ship internationally?",
-      a: "Yes — we ship to over 30 countries with full documentation, traceability and Incoterms of your choice.",
+      a: "Yes - we ship to over 30 countries with full documentation, traceability and Incoterms of your choice.",
     },
     {
       q: "What's the minimum order quantity?",

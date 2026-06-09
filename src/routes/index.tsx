@@ -38,11 +38,8 @@ function HomePage() {
       <Hero />
       <VideoSection />
       <Trust />
-      <AboutPreview />
       <ProductShowcase />
       <WhyChooseUs />
-      <SustainabilityPreview />
-      <Process />
       <Testimonials />
       <CTA />
       <Footer />

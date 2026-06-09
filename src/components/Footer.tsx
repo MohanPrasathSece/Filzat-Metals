@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Globe, Mail, Send, Sparkles } from "lucide-react";
+import { Globe, Mail } from "lucide-react";
 import logoImg from "@/assets/image copy.png";
 
 export function Footer() {
@@ -66,30 +66,11 @@ export function Footer() {
 
           <div>
             <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground/80">
-              Newsletter
+              Contact
             </h4>
-            <p className="mt-5 text-sm text-muted-foreground">
-              Industry insights, delivered quarterly.
-            </p>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="mt-4 flex overflow-hidden rounded-full border border-border bg-card shadow-soft"
-            >
-              <input
-                type="email"
-                required
-                placeholder="Your email"
-                className="flex-1 bg-transparent px-5 py-3 text-sm outline-none placeholder:text-muted-foreground"
-              />
-              <button
-                type="submit"
-                className="bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-              >
-                Join
-              </button>
-            </form>
-            <div className="mt-6 space-y-1 text-xs text-muted-foreground">
+            <div className="mt-5 space-y-2 text-xs text-muted-foreground">
               <p>+91 70601 81694</p>
+              <p>+91 94525 30493</p>
               <p>hello@filizatmetals.com</p>
               <p>E 303 Central Tower, Kela Nagar Chauraha,</p>
               <p>Aligarh, Uttar Pradesh 202001, India</p>

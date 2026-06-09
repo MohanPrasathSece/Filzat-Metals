@@ -17,7 +17,7 @@ import {
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { categories } from "@/lib/products-data";
-import heroImg from "@/assets/metals-hero.png";
+import heroImg from "@/assets/cta-metal-bg.png";
 import facilityImg from "@/assets/about-facility.jpg";
 import sustainImg from "@/assets/sustainability.jpg";
 import ctaBg from "@/assets/cta-metal-bg.png";
@@ -65,13 +65,12 @@ function Hero() {
       <motion.div style={{ y }} className="absolute inset-0">
         <img
           src={heroImg}
-          alt="Molten metal in modern manufacturing facility"
-          className="h-full w-full object-cover"
+          alt="Brushed silver metal surface — Filizat Metals"
+          className="h-full w-full object-cover object-center scale-110"
           width={1920}
-          height={1280}
+          height={1080}
         />
-        <div className="absolute inset-0 bg-white/20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/10 to-white" />
       </motion.div>
 
       <motion.div

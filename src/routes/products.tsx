@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { categories, type Product } from "@/lib/products-data";
 import heroImg from "@/assets/minimal-hero.png";
 import ctaBg from "@/assets/cta-metal-bg.png";
+import industrialMetalsImg from "@/assets/industrial-metals.png";
 
 export const Route = createFileRoute("/products")({
   component: ProductsPage,
@@ -422,38 +423,62 @@ function Quality() {
   ];
   return (
     <section className="px-6 py-20 lg:px-10">
-      <div className="mx-auto max-w-7xl rounded-[2.5rem] silver-gradient p-12 shadow-elevated sm:p-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="grid items-center gap-10 lg:grid-cols-2"
-        >
-          <div>
+      <div className="mx-auto max-w-7xl rounded-[2.5rem] silver-gradient p-10 shadow-elevated sm:p-16">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16 items-center">
+          {/* Image Column */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5 relative"
+          >
+            <div className="overflow-hidden rounded-3xl shadow-soft border border-white/20 group">
+              <img
+                src={industrialMetalsImg}
+                alt="Stacks of premium metal raw materials"
+                className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+                width={800}
+                height={600}
+              />
+            </div>
+          </motion.div>
+
+          {/* Copy Column */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="lg:col-span-7"
+          >
             <div className="text-sm font-medium uppercase tracking-widest text-graphite/70">
               Quality Assurance
             </div>
             <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-graphite sm:text-5xl">
               Verified at every stage.
             </h2>
-          </div>
-          <ul className="grid gap-3 sm:grid-cols-2">
-            {items.map((it, i) => (
-              <motion.li
-                key={it}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex items-center gap-3 rounded-2xl bg-white/70 px-5 py-4 text-sm font-medium text-graphite backdrop-blur"
-              >
-                <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
-                {it}
-              </motion.li>
-            ))}
-          </ul>
-        </motion.div>
+            <p className="mt-5 text-base text-graphite/80 leading-relaxed">
+              Every batch of unbranded base metals, secondary raw materials, and precision hardware alloys undergoes strict chemical and structural inspection to meet global engineering standards.
+            </p>
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+              {items.map((it, i) => (
+                <motion.li
+                  key={it}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  className="flex items-center gap-3 rounded-2xl bg-white/70 px-5 py-4 text-sm font-medium text-graphite backdrop-blur border border-white/30"
+                >
+                  <CheckCircle2 className="h-4.5 w-4.5 flex-shrink-0 text-graphite" />
+                  {it}
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

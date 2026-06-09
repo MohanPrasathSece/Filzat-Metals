@@ -21,6 +21,7 @@ import heroImg from "@/assets/minimal-hero.png";
 import facilityImg from "@/assets/about-facility.jpg";
 import sustainImg from "@/assets/sustainability.jpg";
 import ctaBg from "@/assets/cta-metal-bg.png";
+import whyChooseUsImg from "@/assets/why-choose-us.png";
 export const Route = createFileRoute("/")({
   component: HomePage,
 });
@@ -318,39 +319,77 @@ function ProductShowcase() {
 function WhyChooseUs() {
   const items = [
     { icon: Shield, title: "Quality Assurance", desc: "Every batch verified against international standards before it ships." },
-    { icon: Recycle, title: "Sustainable Manufacturing", desc: "Recycled inputs and low-impact processes across our facilities." },
+    { icon: Recycle, title: "Sustainable Sourcing", desc: "Recycled inputs and low-impact processes across our facilities." },
     { icon: Globe, title: "Global Supply Network", desc: "Reliable logistics across 30+ countries with full traceability." },
     { icon: Truck, title: "Reliable Delivery", desc: "On-time shipments backed by transparent communication." },
   ];
   return (
     <section className="py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="mx-auto max-w-2xl text-center">
-          <div className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Why Choose Us
-          </div>
-          <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-            The standard that the world's leading manufacturers rely on.
-          </h2>
-        </div>
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 items-center">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-7"
+          >
+            <div className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+              Why Choose Us
+            </div>
+            <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl leading-tight">
+              The standard that the world's leading manufacturers rely on.
+            </h2>
+            <p className="mt-5 text-base text-muted-foreground leading-relaxed">
+              We operate with complete transparency, unyielding quality control, and an optimized global logistics network to support your supply chain without interruption.
+            </p>
+            
+            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+              {items.map((it) => (
+                <div
+                  key={it.title}
+                  className="hover-lift glass rounded-3xl p-6 shadow-soft border border-border/60"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl silver-gradient shadow-soft border border-border">
+                    <it.icon className="h-4.5 w-4.5 text-graphite" />
+                  </div>
+                  <h3 className="mt-4 font-display text-lg font-semibold text-foreground">{it.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{it.desc}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((it, i) => (
-            <motion.div
-              key={it.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="hover-lift glass rounded-3xl p-7 shadow-soft"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl silver-gradient shadow-soft">
-                <it.icon className="h-5 w-5 text-graphite" />
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-5 relative"
+          >
+            <div className="relative overflow-hidden rounded-[2.5rem] shadow-elevated border border-border/40 group">
+              <img
+                src={whyChooseUsImg}
+                alt="Metallurgical testing laboratory"
+                className="w-full object-cover aspect-[4/5] hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+                width={800}
+                height={1000}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 pointer-events-none" />
+              
+              {/* Floating badge */}
+              <div className="absolute bottom-6 left-6 right-6 glass p-4 rounded-2xl border border-white/20 backdrop-blur-md shadow-elevated flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-soft">
+                  <Shield className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-foreground">Verified Standards</div>
+                  <div className="text-[11px] text-muted-foreground">ISO 9001 & SGS inspection ready</div>
+                </div>
               </div>
-              <h3 className="mt-5 font-display text-xl font-semibold">{it.title}</h3>
-              <p className="mt-2 text-base leading-relaxed text-muted-foreground">{it.desc}</p>
-            </motion.div>
-          ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

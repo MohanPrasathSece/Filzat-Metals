@@ -82,15 +82,16 @@ function ContactMain() {
 
           <ul className="mt-8 space-y-6">
             {[
-              { icon: Phone, label: "Phone", value: "+91 70601 81694" },
-              { icon: Phone, label: "Phone 2", value: "+91 94525 30493" },
-              { icon: Mail, label: "Email", value: "hello@filizatmetals.com" },
+              { icon: Phone, label: "Phone", value: "+91 70601 81694", href: "tel:+917060181694" },
+              { icon: Phone, label: "Phone 2", value: "+91 94525 30493", href: "tel:+919452530493" },
+              { icon: Mail, label: "Email", value: "hello@filizatmetals.com", href: "mailto:hello@filizatmetals.com" },
               {
                 icon: MapPin,
                 label: "Address",
                 value: "E 303 Central Tower, Kela Nagar Chauraha, Aligarh, Uttar Pradesh 202001, India",
+                href: "https://maps.google.com/?q=E+303+Central+Tower+Kela+Nagar+Chauraha+Aligarh+Uttar+Pradesh+202001+India",
               },
-              { icon: Clock, label: "Working Hours", value: "Mon - Sat  9:00 AM - 7:00 PM IST" },
+              { icon: Clock, label: "Working Hours", value: "Mon - Sat  9:00 AM - 7:00 PM IST", href: null },
             ].map((c) => (
               <li key={c.label} className="flex items-start gap-4">
                 <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl silver-gradient shadow-soft">
@@ -100,7 +101,18 @@ function ContactMain() {
                   <div className="text-sm uppercase tracking-widest text-muted-foreground">
                     {c.label}
                   </div>
-                  <div className="mt-1 text-sm font-medium text-foreground">{c.value}</div>
+                  {c.href ? (
+                    <a
+                      href={c.href}
+                      target={c.href.startsWith("http") ? "_blank" : undefined}
+                      rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="mt-1 block text-sm font-medium text-foreground underline-offset-2 hover:underline hover:text-primary transition-colors"
+                    >
+                      {c.value}
+                    </a>
+                  ) : (
+                    <div className="mt-1 text-sm font-medium text-foreground">{c.value}</div>
+                  )}
                 </div>
               </li>
             ))}
@@ -127,8 +139,21 @@ function ContactForm() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        setSent(true);
-        setTimeout(() => setSent(false), 4000);
+        const form = e.target as HTMLFormElement;
+        const data = Object.fromEntries(new FormData(form).entries());
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            setSent(json.success);
+            setTimeout(() => setSent(false), 4000);
+          })
+          .catch(() => {
+            setSent(false);
+          });
       }}
       className="rounded-3xl border border-border bg-card p-8 shadow-soft sm:p-10"
     >

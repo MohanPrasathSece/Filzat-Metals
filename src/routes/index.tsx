@@ -23,7 +23,8 @@ import sustainImg from "@/assets/sustainability.jpg";
 import ctaBg from "@/assets/cta-metal-bg.png";
 import whyChooseUsImg from "@/assets/why-choose-us.png";
 import videoAsset from "@/assets/VID-20260609-WA0010.mp4";
-
+import gstCert from "@/assets/GST_Registration-Certificate.png";
+import importExportCert from "@/assets/Imported-Exported-code.png";
 export const Route = createFileRoute("/")({
   component: HomePage,
 });
@@ -32,6 +33,7 @@ function HomePage() {
   useEffect(() => {
     document.title = "Filizat Metals - Generations of Sourcing Excellence";
   }, []);
+    const [selectedImg, setSelectedImg] = useState<string | null>(null);
   return (
     <div className="overflow-x-hidden bg-background">
       <Navbar />
@@ -42,6 +44,29 @@ function HomePage() {
       <WhyChooseUs />
       <Testimonials />
       <CTA />
+      <section className="py-32 bg-background">
+        <div className="mx-auto max-w-5xl px-6 text-center">
+          <h2 className="font-display text-3xl font-semibold text-foreground mb-8">Our Certifications</h2>
+          <div className="glass p-8 rounded-2xl border border-white/20 shadow-soft flex flex-col sm:flex-row items-center justify-center gap-8">
+            <div className="relative w-full max-w-md bg-white/10 backdrop-blur-lg rounded-xl border border-white/20 shadow-lg flex items-center justify-center overflow-hidden cursor-pointer" onClick={() => setSelectedImg(gstCert)}>
+              <img src={gstCert} alt="GST Registration Certificate" className="object-contain w-full h-full" />
+            </div>
+            <div className="relative w-full max-w-md bg-white/10 backdrop-blur-lg rounded-xl border border-white/20 shadow-lg flex items-center justify-center overflow-hidden cursor-pointer" onClick={() => setSelectedImg(importExportCert)}>
+              <img src={importExportCert} alt="Imported Exported Code Certificate" className="object-contain w-full h-full" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox modal */}
+      {selectedImg && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setSelectedImg(null)}>
+          <button className="absolute top-4 right-4 text-white text-3xl" onClick={(e) => { e.stopPropagation(); setSelectedImg(null); }} aria-label="Close">
+            ✕
+          </button>
+          <img src={selectedImg} alt="Certificate enlarged" className="max-w-[90vw] max-h-[90vh] object-contain" onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
       <Footer />
     </div>
   );
@@ -151,8 +176,16 @@ function VideoSection() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    video.muted = true;
-    video.play().catch(() => setIsPlaying(false));
+    const tryPlay = () => {
+      video.muted = true;
+      video.play().catch(() => setIsPlaying(false));
+    };
+    video.addEventListener('loadeddata', tryPlay);
+    // Attempt immediately in case already loaded
+    tryPlay();
+    return () => {
+      video.removeEventListener('loadeddata', tryPlay);
+    };
   }, []);
 
   // Unmute on first user interaction anywhere on the page

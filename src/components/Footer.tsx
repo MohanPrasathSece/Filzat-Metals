@@ -68,7 +68,7 @@ export function Footer() {
             <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground/80">
               Contact
             </h4>
-            <div className="mt-5 space-y-2 text-xs text-muted-foreground">
+            <div className="mt-5 space-y-2 text-sm text-muted-foreground">
               <p>+91 70601 81694</p>
               <p>+91 94525 30493</p>
               <p>hello@filizatmetals.com</p>

@@ -159,61 +159,85 @@ function SustainabilityPage() {
       </section>
 
       {/* Traceability Stats Section */}
-      <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 text-center">
-          <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Measurable Accountability
-          </span>
-          <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            Traceable environmental impacts.
-          </h2>
+      <section className="px-6 py-12 lg:px-10">
+        <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2.5rem] bg-[#0e0f11] py-24 sm:py-32 px-6 sm:px-16 border border-white/10 shadow-elevated">
+          {/* Glowing background lights */}
+          <div className="pointer-events-none absolute left-1/4 top-1/4 -z-10 h-96 w-96 rounded-full bg-white/[0.02] blur-3xl" />
+          <div className="pointer-events-none absolute right-1/4 bottom-1/4 -z-10 h-96 w-96 rounded-full bg-white/[0.02] blur-3xl" />
+          
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="text-sm font-medium uppercase tracking-widest text-zinc-500">
+              Measurable Accountability
+            </span>
+            <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+              Traceable environmental impacts.
+            </h2>
+          </div>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-3">
+          <div className="mt-20 grid gap-8 md:grid-cols-3">
+            {/* Stat 1 */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="glass rounded-3xl p-8 border border-border"
+              className="group hover-lift relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-elevated transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04]"
             >
-              <div className="font-display text-5xl font-bold text-metal">Up to 90%</div>
-              <p className="mt-3 text-sm text-muted-foreground font-medium uppercase tracking-wider">
-                Smelting Energy Abatement
-              </p>
-              <p className="mt-2 text-xs text-muted-foreground">
-                Using unalloyed pre-consumer scrap metal instead of raw ore processing.
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 border border-white/10 mb-8 transition-transform group-hover:scale-105">
+                <Recycle className="h-5 w-5 text-white" />
+              </div>
+              <div className="font-display text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-zinc-200 to-zinc-400">
+                Up to 90%
+              </div>
+              <div className="mt-5 inline-flex items-center rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-300">
+                Energy Abatement
+              </div>
+              <p className="mt-4 text-xs leading-relaxed text-zinc-400">
+                Using unalloyed pre-consumer scrap metal instead of energy-intensive raw ore smelting.
               </p>
             </motion.div>
 
+            {/* Stat 2 */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="glass rounded-3xl p-8 border border-border"
+              className="group hover-lift relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-elevated transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04]"
             >
-              <div className="font-display text-5xl font-bold text-metal">100%</div>
-              <p className="mt-3 text-sm text-muted-foreground font-medium uppercase tracking-wider">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 border border-white/10 mb-8 transition-transform group-hover:scale-105">
+                <ShieldCheck className="h-5 w-5 text-white" />
+              </div>
+              <div className="font-display text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-zinc-200 to-zinc-400">
+                100%
+              </div>
+              <div className="mt-5 inline-flex items-center rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-300">
                 Conflict-Free Sourcing
-              </p>
-              <p className="mt-2 text-xs text-muted-foreground">
-                Completely trace-verified routes in strict compliance with global RMI guidelines.
+              </div>
+              <p className="mt-4 text-xs leading-relaxed text-zinc-400">
+                Completely trace-verified procurement routes in strict alignment with global RMI standards.
               </p>
             </motion.div>
 
+            {/* Stat 3 */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="glass rounded-3xl p-8 border border-border"
+              className="group hover-lift relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-elevated transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04]"
             >
-              <div className="font-display text-5xl font-bold text-metal">RoHS & REACH</div>
-              <p className="mt-3 text-sm text-muted-foreground font-medium uppercase tracking-wider">
-                Regulatory Compliance
-              </p>
-              <p className="mt-2 text-xs text-muted-foreground">
-                Eco-brass materials and components certified below standard hazardous substance limits.
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 border border-white/10 mb-8 transition-transform group-hover:scale-105">
+                <Leaf className="h-5 w-5 text-white" />
+              </div>
+              <div className="font-display text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-zinc-200 to-zinc-400">
+                REACH
+              </div>
+              <div className="mt-5 inline-flex items-center rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-300">
+                RoHS Compliance
+              </div>
+              <p className="mt-4 text-xs leading-relaxed text-zinc-400">
+                Secondary brass alloys and components certified below standard global hazard thresholds.
               </p>
             </motion.div>
           </div>

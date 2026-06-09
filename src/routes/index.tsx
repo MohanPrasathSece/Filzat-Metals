@@ -143,13 +143,42 @@ function Hero() {
 /* ---------------- Video Section ---------------- */
 function VideoSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);   // starts muted (browser requirement)
   const [isPlaying, setIsPlaying] = useState(true);
+  const [soundEnabled, setSoundEnabled] = useState(false); // tracks if user has ever enabled sound
+
+  // Force autoplay on mount — works on all devices
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.play().catch(() => setIsPlaying(false));
+  }, []);
+
+  // Unmute on first user interaction anywhere on the page
+  useEffect(() => {
+    const enableSound = () => {
+      const video = videoRef.current;
+      if (!video || soundEnabled) return;
+      video.muted = false;
+      setIsMuted(false);
+      setSoundEnabled(true);
+    };
+    document.addEventListener("click", enableSound, { once: true });
+    document.addEventListener("touchstart", enableSound, { once: true });
+    document.addEventListener("keydown", enableSound, { once: true });
+    return () => {
+      document.removeEventListener("click", enableSound);
+      document.removeEventListener("touchstart", enableSound);
+      document.removeEventListener("keydown", enableSound);
+    };
+  }, [soundEnabled]);
 
   const toggleMute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
       setIsMuted(videoRef.current.muted);
+      setSoundEnabled(true);
     }
   };
 
@@ -179,21 +208,33 @@ function VideoSection() {
           </p>
         </div>
 
-        <div className="relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] shadow-elevated border border-border bg-black aspect-video group">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] shadow-elevated border border-border bg-black aspect-video">
           <video
             ref={videoRef}
             src={videoAsset}
             autoPlay
+            muted
             loop
             playsInline
             className="h-full w-full object-cover"
           />
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-500" />
 
-          {/* Video Controls - always visible on mobile, hover-only on desktop */}
-          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex gap-2 sm:gap-3 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
-            {/* Play/Pause Button */}
+          {/* Subtle dark overlay */}
+          <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+
+          {/* "Tap for sound" hint — fades out once sound is enabled */}
+          {!soundEnabled && (
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm pointer-events-none select-none">
+              <svg className="h-3.5 w-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Tap anywhere for sound
+            </div>
+          )}
+
+          {/* Controls — always visible */}
+          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex gap-2 sm:gap-3">
+            {/* Play/Pause */}
             <button
               onClick={togglePlay}
               className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/95 text-graphite shadow-soft backdrop-blur hover:scale-105 active:scale-95 transition-transform cursor-pointer"
@@ -211,11 +252,11 @@ function VideoSection() {
               )}
             </button>
 
-            {/* Music/Mute Button */}
+            {/* Mute/Unmute */}
             <button
               onClick={toggleMute}
               className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/95 text-graphite shadow-soft backdrop-blur hover:scale-105 active:scale-95 transition-transform cursor-pointer"
-              aria-label={isMuted ? "Enable Music" : "Mute Music"}
+              aria-label={isMuted ? "Enable Sound" : "Mute Sound"}
             >
               {isMuted ? (
                 <svg className="h-4 w-4 sm:h-5 sm:w-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">

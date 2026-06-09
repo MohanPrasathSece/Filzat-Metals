@@ -190,41 +190,41 @@ function VideoSection() {
             playsInline
             className="h-full w-full object-cover"
           />
-          {/* Dark overlay for contrast on hover */}
+          {/* Dark overlay */}
           <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-500" />
 
-          {/* Video Controls Overlay */}
-          <div className="absolute bottom-6 right-6 z-20 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {/* Video Controls — always visible on mobile, hover-only on desktop */}
+          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex gap-2 sm:gap-3 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
             {/* Play/Pause Button */}
             <button
               onClick={togglePlay}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-white/95 text-graphite shadow-soft backdrop-blur hover:scale-105 transition-transform cursor-pointer"
+              className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/95 text-graphite shadow-soft backdrop-blur hover:scale-105 active:scale-95 transition-transform cursor-pointer"
               aria-label={isPlaying ? "Pause Video" : "Play Video"}
             >
               {isPlaying ? (
-                <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                <svg className="h-4 w-4 sm:h-5 sm:w-5 fill-current" viewBox="0 0 24 24">
                   <rect x="6" y="5" width="4" height="14" rx="1" />
                   <rect x="14" y="5" width="4" height="14" rx="1" />
                 </svg>
               ) : (
-                <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                <svg className="h-4 w-4 sm:h-5 sm:w-5 fill-current" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
               )}
             </button>
 
-            {/* Mute/Unmute Button */}
+            {/* Music/Mute Button */}
             <button
               onClick={toggleMute}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-white/95 text-graphite shadow-soft backdrop-blur hover:scale-105 transition-transform cursor-pointer"
-              aria-label={isMuted ? "Unmute Video" : "Mute Video"}
+              className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/95 text-graphite shadow-soft backdrop-blur hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+              aria-label={isMuted ? "Enable Music" : "Mute Music"}
             >
               {isMuted ? (
-                <svg className="h-5 w-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <svg className="h-4 w-4 sm:h-5 sm:w-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                   <path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               ) : (
-                <svg className="h-5 w-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <svg className="h-4 w-4 sm:h-5 sm:w-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                   <path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               )}

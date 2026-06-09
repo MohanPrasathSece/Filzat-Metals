@@ -159,40 +159,37 @@ function SustainabilityPage() {
       </section>
 
       {/* Traceability Stats Section */}
-      <section className="px-6 py-12 lg:px-10">
-        <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2.5rem] bg-[#0e0f11] py-24 sm:py-32 px-6 sm:px-16 border border-white/10 shadow-elevated">
-          {/* Glowing background lights */}
-          <div className="pointer-events-none absolute left-1/4 top-1/4 -z-10 h-96 w-96 rounded-full bg-white/[0.02] blur-3xl" />
-          <div className="pointer-events-none absolute right-1/4 bottom-1/4 -z-10 h-96 w-96 rounded-full bg-white/[0.02] blur-3xl" />
-          
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="text-sm font-medium uppercase tracking-widest text-zinc-500">
-              Measurable Accountability
-            </span>
-            <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              Traceable environmental impacts.
-            </h2>
-          </div>
+      <section className="bg-secondary/30 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 text-center">
+          <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+            Measurable Accountability
+          </span>
+          <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Traceable environmental impacts.
+          </h2>
 
-          <div className="mt-20 grid gap-8 md:grid-cols-3">
+          <div className="mt-16 grid gap-8 md:grid-cols-3">
             {/* Stat 1 */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="group hover-lift relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-elevated transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04]"
+              className="group hover-lift glass rounded-3xl p-8 shadow-soft hover:shadow-elevated hover:bg-white/80 transition-all duration-300 flex flex-col justify-between items-start text-left min-h-[300px]"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 border border-white/10 mb-8 transition-transform group-hover:scale-105">
-                <Recycle className="h-5 w-5 text-white" />
+              <div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-border/80 mb-6 shadow-soft transition-transform group-hover:scale-105">
+                  <Recycle className="h-5 w-5 text-graphite" />
+                </div>
+                <div className="font-display text-5xl font-bold tracking-tight text-metal sm:text-6xl">
+                  Up to 90%
+                </div>
+                <div className="h-0.5 w-12 bg-silver/40 mt-4 mb-4 transition-all group-hover:w-20 duration-500" />
+                <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Energy Abatement
+                </div>
               </div>
-              <div className="font-display text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-zinc-200 to-zinc-400">
-                Up to 90%
-              </div>
-              <div className="mt-5 inline-flex items-center rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-300">
-                Energy Abatement
-              </div>
-              <p className="mt-4 text-xs leading-relaxed text-zinc-400">
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 Using unalloyed pre-consumer scrap metal instead of energy-intensive raw ore smelting.
               </p>
             </motion.div>
@@ -203,18 +200,21 @@ function SustainabilityPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="group hover-lift relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-elevated transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04]"
+              className="group hover-lift glass rounded-3xl p-8 shadow-soft hover:shadow-elevated hover:bg-white/80 transition-all duration-300 flex flex-col justify-between items-start text-left min-h-[300px]"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 border border-white/10 mb-8 transition-transform group-hover:scale-105">
-                <ShieldCheck className="h-5 w-5 text-white" />
+              <div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-border/80 mb-6 shadow-soft transition-transform group-hover:scale-105">
+                  <ShieldCheck className="h-5 w-5 text-graphite" />
+                </div>
+                <div className="font-display text-5xl font-bold tracking-tight text-metal sm:text-6xl">
+                  100%
+                </div>
+                <div className="h-0.5 w-12 bg-silver/40 mt-4 mb-4 transition-all group-hover:w-20 duration-500" />
+                <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Conflict-Free Sourcing
+                </div>
               </div>
-              <div className="font-display text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-zinc-200 to-zinc-400">
-                100%
-              </div>
-              <div className="mt-5 inline-flex items-center rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-300">
-                Conflict-Free Sourcing
-              </div>
-              <p className="mt-4 text-xs leading-relaxed text-zinc-400">
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 Completely trace-verified procurement routes in strict alignment with global RMI standards.
               </p>
             </motion.div>
@@ -225,18 +225,21 @@ function SustainabilityPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="group hover-lift relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-elevated transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04]"
+              className="group hover-lift glass rounded-3xl p-8 shadow-soft hover:shadow-elevated hover:bg-white/80 transition-all duration-300 flex flex-col justify-between items-start text-left min-h-[300px]"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 border border-white/10 mb-8 transition-transform group-hover:scale-105">
-                <Leaf className="h-5 w-5 text-white" />
+              <div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-border/80 mb-6 shadow-soft transition-transform group-hover:scale-105">
+                  <Leaf className="h-5 w-5 text-graphite" />
+                </div>
+                <div className="font-display text-5xl font-bold tracking-tight text-metal sm:text-6xl">
+                  REACH
+                </div>
+                <div className="h-0.5 w-12 bg-silver/40 mt-4 mb-4 transition-all group-hover:w-20 duration-500" />
+                <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  RoHS Compliance
+                </div>
               </div>
-              <div className="font-display text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-zinc-200 to-zinc-400">
-                REACH
-              </div>
-              <div className="mt-5 inline-flex items-center rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-300">
-                RoHS Compliance
-              </div>
-              <p className="mt-4 text-xs leading-relaxed text-zinc-400">
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 Secondary brass alloys and components certified below standard global hazard thresholds.
               </p>
             </motion.div>

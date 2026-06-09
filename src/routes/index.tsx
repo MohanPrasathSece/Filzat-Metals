@@ -176,15 +176,24 @@ function VideoSection() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+    
+    // Explicitly set properties that are sometimes ignored by mobile browsers
+    video.defaultMuted = true;
+    video.muted = true;
+    video.playsInline = true;
+
     const tryPlay = () => {
-      video.muted = true;
       video.play().catch(() => setIsPlaying(false));
     };
+    
     video.addEventListener('loadeddata', tryPlay);
-    // Attempt immediately in case already loaded
+    video.addEventListener('canplay', tryPlay);
+    
+    // Attempt immediately
     tryPlay();
     return () => {
       video.removeEventListener('loadeddata', tryPlay);
+      video.removeEventListener('canplay', tryPlay);
     };
   }, []);
 
@@ -247,6 +256,7 @@ function VideoSection() {
             src={videoAsset}
             autoPlay
             muted
+            defaultMuted
             loop
             playsInline
             className="h-full w-full object-cover"
@@ -449,45 +459,22 @@ function ProductShowcase() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((c, i) => (
-            <motion.div
-              key={c.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
+          {/* Simplified Product Showcase */}
+          <div className="mt-16 flex flex-col items-center gap-6">
+            <p className="text-muted-foreground text-center max-w-md">
+              Explore our full range of premium metal products and solutions.
+            </p>
+            <Link
+              to="/products"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-elevated transition-all hover:scale-[1.03]"
             >
-              <Link
-                to="/products"
-                className="hover-lift group block overflow-hidden rounded-3xl border border-border bg-card shadow-soft"
-              >
-                <div className="aspect-[4/3] overflow-hidden bg-secondary">
-                  <img
-                    src={c.image}
-                    alt={c.name}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                    width={1024}
-                    height={768}
-                  />
-                </div>
-                <div className="flex items-center justify-between p-6">
-                  <div>
-                    <div className="font-display text-xl font-semibold tracking-tight">
-                      {c.name}
-                    </div>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {c.products.length} product{c.products.length > 1 ? "s" : ""}
-                    </p>
-                  </div>
-                  <ArrowRight className="h-5 w-5 -translate-x-2 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+              View All Products
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+
         </div>
-      </div>
+
     </section>
   );
 }

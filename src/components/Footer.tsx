@@ -16,7 +16,7 @@ export function Footer() {
               industrial production and global market demands.
             </p>
             <div className="mt-6 flex gap-3">
-              {[Globe, Send, Sparkles, Mail].map((Icon, i) => (
+              {[Globe, Mail].map((Icon, i) => (
                 <a
                   key={i}
                   href="#"

@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { 
-  ArrowRight, 
-  Shield, 
-  Truck, 
-  Scale, 
-  Award, 
-  Factory, 
-  Layers, 
-  Globe, 
-  CheckCircle2 
+import {
+  ArrowRight,
+  Shield,
+  Truck,
+  Scale,
+  Award,
+  Factory,
+  Layers,
+  Globe,
+  CheckCircle2,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -30,43 +30,47 @@ function AboutPage() {
     {
       icon: Scale,
       title: "Absolute Honesty",
-      desc: "Transparency is our signature trait. From market rates to material grades, we operate with complete alignment and clear disclosures."
+      desc: "Transparency is our signature trait. From market rates to material grades, we operate with complete alignment and clear disclosures.",
     },
     {
       icon: Shield,
       title: "Unyielding Quality",
-      desc: "Every batch of unbranded base metals and hardware alloys meets strict chemical and structural standards verified at sourcing."
+      desc: "Every batch of unbranded base metals and hardware alloys meets strict chemical and structural standards verified at sourcing.",
     },
     {
       icon: Truck,
       title: "Clockwork timely delivery",
-      desc: "Every shipment is meticulously packed and sent through optimized corridors to prevent assembly lines from stopping."
-    }
+      desc: "Every shipment is meticulously packed and sent through optimized corridors to prevent assembly lines from stopping.",
+    },
   ];
 
   const portfolio = [
     {
       title: "High-Purity Copper & Zinc",
-      items: ["Grade A copper cathodes", "Unalloyed copper scrap (Berry)", "Refined zinc ingots"]
+      items: ["Grade A copper cathodes", "Unalloyed copper scrap (Berry)", "Refined zinc ingots"],
     },
     {
-      title: "Lead-Free \"Eco-Brass\"",
-      items: ["Structural billets", "Unbranded wire coils", "Silicon brass architectural items"]
+      title: 'Lead-Free "Eco-Brass"',
+      items: ["Structural billets", "Unbranded wire coils", "Silicon brass architectural items"],
     },
     {
       title: "Sustainable Aluminum",
-      items: ["Bulk primary ingots (P1020)", "Pre-consumer scrap briquettes", "European regulatory compliance"]
+      items: [
+        "Bulk primary ingots (P1020)",
+        "Pre-consumer scrap briquettes",
+        "European regulatory compliance",
+      ],
     },
     {
       title: "Industrial Minerals",
-      items: ["Premium mica flakes", "Micronized powders", "RMI-compliant sourcing"]
-    }
+      items: ["Premium mica flakes", "Micronized powders", "RMI-compliant sourcing"],
+    },
   ];
 
   return (
     <div className="overflow-x-hidden bg-background">
       <Navbar />
-      
+
       {/* Hero Header */}
       <section className="relative overflow-hidden bg-secondary/40 pb-20 pt-40 sm:pt-44">
         <div className="pointer-events-none absolute -top-32 left-1/2 -z-10 h-96 w-[36rem] -translate-x-1/2 rounded-full bg-silver-light/50 blur-3xl" />
@@ -83,9 +87,10 @@ function AboutPage() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.05 }}
-            className="mt-5 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl text-foreground"
+            className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl text-foreground"
           >
-            Generations Of Sourcing<br />
+            Generations Of Sourcing
+            <br />
             <span className="text-metal">Excellence.</span>
           </motion.h1>
           <motion.p
@@ -94,7 +99,9 @@ function AboutPage() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mx-auto mt-7 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            Evolving from a traditional casting foundry into a modernized global logistics aggregator, bridging the gap between heavy industrial production and global manufacturing demands.
+            Evolving from a traditional casting foundry into a modernized global logistics
+            aggregator, bridging the gap between heavy industrial production and global
+            manufacturing demands.
           </motion.p>
         </div>
       </section>
@@ -130,14 +137,21 @@ function AboutPage() {
               Aligarh metallurgical expertise, globally scaled.
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Headquartered in the historic metalcraft hub of Aligarh, India, Filizat Metals stands as a premier multi-generational wholesale supplier and global sourcing aggregator. We have evolved from a local casting foundry into a modernized, worldwide logistics powerhouse. 
+              Headquartered in the historic metalcraft hub of Aligarh, India, Filizat Metals stands
+              as a premier multi-generational wholesale supplier and global sourcing aggregator. We
+              have evolved from a local casting foundry into a modernized, worldwide logistics
+              powerhouse.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Our deep-seated industry connections allow us to seamlessly bridge the gap between heavy industrial production and global manufacturing demands, exporting unbranded base metals, secondary raw materials, and precision hardware alloys at competitive Indian market rates.
+              Our deep-seated industry connections allow us to seamlessly bridge the gap between
+              heavy industrial production and global manufacturing demands, exporting unbranded base
+              metals, secondary raw materials, and precision hardware alloys at competitive Indian
+              market rates.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-foreground">
-                <Globe className="h-4 w-4 text-silver-dark" /> Exports to US, EU, Canada, UK, Australia
+                <Globe className="h-4 w-4 text-silver-dark" /> Exports to US, EU, Canada, UK,
+                Australia
               </div>
             </div>
           </motion.div>
@@ -169,7 +183,9 @@ function AboutPage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl silver-gradient shadow-soft border border-border">
                   <p.icon className="h-5 w-5 text-graphite" />
                 </div>
-                <h3 className="mt-6 font-display text-2xl font-semibold text-foreground">{p.title}</h3>
+                <h3 className="mt-6 font-display text-2xl font-semibold text-foreground">
+                  {p.title}
+                </h3>
                 <p className="mt-3 text-base leading-relaxed text-muted-foreground">{p.desc}</p>
               </motion.div>
             ))}
@@ -199,7 +215,9 @@ function AboutPage() {
                 transition={{ duration: 0.6, delay: i * 0.08 }}
                 className="rounded-3xl border border-border bg-card p-6 shadow-soft"
               >
-                <h4 className="font-display text-xl font-semibold text-foreground tracking-tight">{cat.title}</h4>
+                <h4 className="font-display text-xl font-semibold text-foreground tracking-tight">
+                  {cat.title}
+                </h4>
                 <ul className="mt-4 space-y-2">
                   {cat.items.map((it) => (
                     <li key={it} className="flex items-start gap-2 text-base text-muted-foreground">
@@ -237,7 +255,10 @@ function AboutPage() {
               Entirely Open To Independent Inspections
             </h3>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              To give our international client base total peace of mind, we are fully open to third-party quality audits (such as **SGS, Bureau Veritas, or Intertek**) at any stage of the sourcing or loading process. We don't just deliver metals; we deliver a legacy of trust.
+              To give our international client base total peace of mind, we are fully open to
+              third-party quality audits (such as **SGS, Bureau Veritas, or Intertek**) at any stage
+              of the sourcing or loading process. We don't just deliver metals; we deliver a legacy
+              of trust.
             </p>
             <div className="mt-8 flex justify-center gap-3">
               <Link

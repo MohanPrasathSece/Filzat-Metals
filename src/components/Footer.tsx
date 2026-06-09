@@ -6,13 +6,14 @@ export function Footer() {
   return (
     <footer className="border-t border-border/60 bg-secondary/40">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
-        <div className="grid gap-12 lg:grid-cols-4">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2">
               <img src={logoImg} alt="Filizat Metals" className="h-10 w-auto" />
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              Generations of uncompromised sourcing excellence. Bridging the gap between heavy industrial production and global market demands.
+              Generations of uncompromised sourcing excellence. Bridging the gap between heavy
+              industrial production and global market demands.
             </p>
             <div className="mt-6 flex gap-3">
               {[Globe, Send, Sparkles, Mail].map((Icon, i) => (

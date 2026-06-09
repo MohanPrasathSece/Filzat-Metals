@@ -24,12 +24,7 @@ function ProductsPage() {
       <Hero />
       <CategoryNav />
       {categories.map((cat, i) => (
-        <CategorySection
-          key={cat.id}
-          cat={cat}
-          reverse={i % 2 === 1}
-          onOpen={setActive}
-        />
+        <CategorySection key={cat.id} cat={cat} reverse={i % 2 === 1} onOpen={setActive} />
       ))}
       <Industries />
       <Quality />
@@ -70,9 +65,10 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.05 }}
-          className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
+          className="mt-6 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl"
         >
-          Premium Metal Products<br />
+          Premium Metal Products
+          <br />
           <span className="text-metal">For Global Industries.</span>
         </motion.h1>
         <motion.p
@@ -81,24 +77,24 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
-          High-quality metals, alloys, raw materials and industrial components —
-          delivered with precision, reliability and sustainability.
+          High-quality metals, alloys, raw materials and industrial components — delivered with
+          precision, reliability and sustainability.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-3"
+          className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
           <a
             href="#categories"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:scale-105"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:scale-105 sm:w-auto"
           >
             Explore Categories <ArrowRight className="h-4 w-4" />
           </a>
           <Link
             to="/contact"
-            className="glass inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-foreground transition-all hover:scale-105"
+            className="glass inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-foreground transition-all hover:scale-105 sm:w-auto"
           >
             Request Quote
           </Link>
@@ -241,7 +237,9 @@ function ProductCard({
       onClick={() => onOpen(product)}
       className="hover-lift group flex flex-col overflow-hidden rounded-3xl border border-silver-light/80 bg-card text-left shadow-soft"
     >
-      <div className={`overflow-hidden bg-secondary/60 ${compact ? "aspect-square" : "aspect-[5/4]"}`}>
+      <div
+        className={`overflow-hidden bg-secondary/60 ${compact ? "aspect-square" : "aspect-[5/4]"}`}
+      >
         <img
           src={product.image}
           alt={product.name}
@@ -294,7 +292,7 @@ function ProductModal({ product, onClose }: { product: Product; onClose: () => v
         exit={{ opacity: 0, scale: 0.96, y: 10 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         onClick={(e) => e.stopPropagation()}
-        className="relative grid max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-[2rem] bg-card shadow-elevated lg:grid-cols-2"
+        className="relative flex max-h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-[1.5rem] bg-card shadow-elevated sm:rounded-[2rem] lg:grid lg:grid-cols-2"
       >
         <button
           onClick={onClose}
@@ -304,7 +302,7 @@ function ProductModal({ product, onClose }: { product: Product; onClose: () => v
           <X className="h-4 w-4" />
         </button>
 
-        <div className="overflow-hidden bg-secondary/60">
+        <div className="h-48 overflow-hidden bg-secondary/60 sm:h-64 lg:h-full">
           <img
             src={product.image}
             alt={product.name}
@@ -460,7 +458,9 @@ function Quality() {
               Verified at every stage.
             </h2>
             <p className="mt-5 text-base text-graphite/80 leading-relaxed">
-              Every batch of unbranded base metals, secondary raw materials, and precision hardware alloys undergoes strict chemical and structural inspection to meet global engineering standards.
+              Every batch of unbranded base metals, secondary raw materials, and precision hardware
+              alloys undergoes strict chemical and structural inspection to meet global engineering
+              standards.
             </p>
             <ul className="mt-8 grid gap-4 sm:grid-cols-2">
               {items.map((it, i) => (
@@ -505,8 +505,8 @@ function InquiryCTA() {
             Need custom metal solutions?
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-            Our team is ready to help with your product requirements, custom
-            specifications and large-scale supply.
+            Our team is ready to help with your product requirements, custom specifications and
+            large-scale supply.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Link

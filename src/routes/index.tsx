@@ -17,11 +17,13 @@ import {
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { categories } from "@/lib/products-data";
-import heroImg from "@/assets/minimal-hero.png";
+import heroImg from "@/assets/metals-hero.png";
 import facilityImg from "@/assets/about-facility.jpg";
 import sustainImg from "@/assets/sustainability.jpg";
 import ctaBg from "@/assets/cta-metal-bg.png";
 import whyChooseUsImg from "@/assets/why-choose-us.png";
+import videoAsset from "@/assets/VID-20260609-WA0010.mp4";
+
 export const Route = createFileRoute("/")({
   component: HomePage,
 });
@@ -34,6 +36,7 @@ function HomePage() {
     <div className="overflow-x-hidden bg-background">
       <Navbar />
       <Hero />
+      <VideoSection />
       <Trust />
       <AboutPreview />
       <ProductShowcase />
@@ -55,7 +58,10 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative flex h-screen items-center justify-center overflow-hidden">
+    <section
+      ref={ref}
+      className="relative flex h-screen items-center justify-center overflow-hidden"
+    >
       <motion.div style={{ y }} className="absolute inset-0">
         <img
           src={heroImg}
@@ -68,24 +74,27 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white" />
       </motion.div>
 
-      <motion.div style={{ opacity }} className="relative z-10 mx-auto max-w-5xl px-6 pt-24 text-center">
+      <motion.div
+        style={{ opacity }}
+        className="relative z-10 mx-auto max-w-5xl px-6 pt-24 text-center"
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className="glass mx-auto inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium text-foreground/70"
         >
-          <Sparkles className="h-3.5 w-3.5" />
-          A premium metal solutions company
+          <Sparkles className="h-3.5 w-3.5" />A premium metal solutions company
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1 }}
-          className="mt-6 font-display text-5xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+          className="mt-6 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-7xl"
         >
-          Shaping Sustainable<br />
+          Shaping Sustainable
+          <br />
           Metal Solutions <span className="text-metal">For Tomorrow</span>
         </motion.h1>
 
@@ -93,33 +102,32 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+          className="mx-auto mt-7 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg"
         >
-          Delivering high-quality metal products with precision, innovation and
-          environmental responsibility — for the industries that build tomorrow.
+          Delivering high-quality metal products with precision, innovation and environmental
+          responsibility — for the industries that build tomorrow.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.45 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-3"
+          className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
           <Link
             to="/products"
-            className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-elevated transition-all hover:scale-[1.03]"
+            className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-elevated transition-all hover:scale-[1.03] sm:w-auto"
           >
             Explore Products
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
             to="/contact"
-            className="glass inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-foreground transition-all hover:scale-[1.03]"
+            className="glass inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-foreground transition-all hover:scale-[1.03] sm:w-auto"
           >
             Contact Us
           </Link>
         </motion.div>
-
       </motion.div>
 
       <motion.div
@@ -130,6 +138,101 @@ function Hero() {
       >
         <ChevronDown className="h-5 w-5 animate-bounce" />
       </motion.div>
+    </section>
+  );
+}
+
+/* ---------------- Video Section ---------------- */
+function VideoSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  return (
+    <section className="py-16 sm:py-24 bg-background">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="mx-auto max-w-3xl text-center mb-12">
+          <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+            Operational Showcase
+          </span>
+          <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Precision in Motion.
+          </h2>
+          <p className="mt-4 text-muted-foreground text-sm sm:text-base">
+            Take a virtual walkthrough of our state-of-the-art processing facilities and quality assurance labs.
+          </p>
+        </div>
+
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] shadow-elevated border border-border bg-black aspect-video group">
+          <video
+            ref={videoRef}
+            src={videoAsset}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-full w-full object-cover"
+          />
+          {/* Dark overlay for contrast on hover */}
+          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-500" />
+
+          {/* Video Controls Overlay */}
+          <div className="absolute bottom-6 right-6 z-20 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {/* Play/Pause Button */}
+            <button
+              onClick={togglePlay}
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-white/95 text-graphite shadow-soft backdrop-blur hover:scale-105 transition-transform cursor-pointer"
+              aria-label={isPlaying ? "Pause Video" : "Play Video"}
+            >
+              {isPlaying ? (
+                <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                  <rect x="6" y="5" width="4" height="14" rx="1" />
+                  <rect x="14" y="5" width="4" height="14" rx="1" />
+                </svg>
+              ) : (
+                <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              )}
+            </button>
+
+            {/* Mute/Unmute Button */}
+            <button
+              onClick={toggleMute}
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-white/95 text-graphite shadow-soft backdrop-blur hover:scale-105 transition-transform cursor-pointer"
+              aria-label={isMuted ? "Unmute Video" : "Mute Video"}
+            >
+              {isMuted ? (
+                <svg className="h-5 w-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              ) : (
+                <svg className="h-5 w-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -182,7 +285,9 @@ function Trust() {
             <div className="font-display text-5xl font-semibold tracking-tight text-foreground sm:text-6xl">
               <Counter to={s.n} suffix={s.s} />
             </div>
-            <div className="mt-2 text-sm uppercase tracking-widest text-muted-foreground">{s.l}</div>
+            <div className="mt-2 text-sm uppercase tracking-widest text-muted-foreground">
+              {s.l}
+            </div>
           </motion.div>
         ))}
       </div>
@@ -225,10 +330,9 @@ function AboutPreview() {
             A premium partner for industrial metal supply.
           </h2>
           <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
-            For over fifteen years, Filizat Metals has been a trusted source of
-            high-purity metals, refined alloys and unbranded raw materials for
-            manufacturers across the globe. We combine precision, ancestral integrity and
-            logistical fluidness in every shipment.
+            For over fifteen years, Filizat Metals has been a trusted source of high-purity metals,
+            refined alloys and unbranded raw materials for manufacturers across the globe. We
+            combine precision, ancestral integrity and logistical fluidness in every shipment.
           </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {[
@@ -269,8 +373,8 @@ function ProductShowcase() {
             Engineered for industries that demand precision.
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Seven categories. Twenty-plus refined materials and components — all
-            held to a single uncompromising standard.
+            Seven categories. Twenty-plus refined materials and components — all held to a single
+            uncompromising standard.
           </p>
         </div>
 
@@ -299,7 +403,9 @@ function ProductShowcase() {
                 </div>
                 <div className="flex items-center justify-between p-6">
                   <div>
-                    <div className="font-display text-xl font-semibold tracking-tight">{c.name}</div>
+                    <div className="font-display text-xl font-semibold tracking-tight">
+                      {c.name}
+                    </div>
                     <p className="mt-1 text-sm text-muted-foreground">
                       {c.products.length} product{c.products.length > 1 ? "s" : ""}
                     </p>
@@ -318,16 +424,32 @@ function ProductShowcase() {
 /* ---------------- Why choose us ---------------- */
 function WhyChooseUs() {
   const items = [
-    { icon: Shield, title: "Quality Assurance", desc: "Every batch verified against international standards before it ships." },
-    { icon: Recycle, title: "Sustainable Sourcing", desc: "Recycled inputs and low-impact processes across our facilities." },
-    { icon: Globe, title: "Global Supply Network", desc: "Reliable logistics across 30+ countries with full traceability." },
-    { icon: Truck, title: "Reliable Delivery", desc: "On-time shipments backed by transparent communication." },
+    {
+      icon: Shield,
+      title: "Quality Assurance",
+      desc: "Every batch verified against international standards before it ships.",
+    },
+    {
+      icon: Recycle,
+      title: "Sustainable Sourcing",
+      desc: "Recycled inputs and low-impact processes across our facilities.",
+    },
+    {
+      icon: Globe,
+      title: "Global Supply Network",
+      desc: "Reliable logistics across 30+ countries with full traceability.",
+    },
+    {
+      icon: Truck,
+      title: "Reliable Delivery",
+      desc: "On-time shipments backed by transparent communication.",
+    },
   ];
   return (
     <section className="py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -341,9 +463,10 @@ function WhyChooseUs() {
               The standard that the world's leading manufacturers rely on.
             </h2>
             <p className="mt-5 text-base text-muted-foreground leading-relaxed">
-              We operate with complete transparency, unyielding quality control, and an optimized global logistics network to support your supply chain without interruption.
+              We operate with complete transparency, unyielding quality control, and an optimized
+              global logistics network to support your supply chain without interruption.
             </p>
-            
+
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
               {items.map((it) => (
                 <div
@@ -353,8 +476,10 @@ function WhyChooseUs() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl silver-gradient shadow-soft border border-border">
                     <it.icon className="h-4.5 w-4.5 text-graphite" />
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-semibold text-foreground">{it.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{it.desc}</p>
+                  <h3 className="mt-4 font-display text-xl font-semibold text-foreground">
+                    {it.title}
+                  </h3>
+                  <p className="mt-2 text-base text-muted-foreground leading-relaxed">{it.desc}</p>
                 </div>
               ))}
             </div>
@@ -377,7 +502,7 @@ function WhyChooseUs() {
                 height={1000}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 pointer-events-none" />
-              
+
               {/* Floating badge */}
               <div className="absolute bottom-6 left-6 right-6 glass p-4 rounded-2xl border border-white/20 backdrop-blur-md shadow-elevated flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-soft">
@@ -385,7 +510,9 @@ function WhyChooseUs() {
                 </div>
                 <div>
                   <div className="text-xs font-semibold text-foreground">Verified Standards</div>
-                  <div className="text-[11px] text-muted-foreground">ISO 9001 & SGS inspection ready</div>
+                  <div className="text-[11px] text-muted-foreground">
+                    ISO 9001 & SGS inspection ready
+                  </div>
                 </div>
               </div>
             </div>
@@ -426,8 +553,8 @@ function SustainabilityPreview() {
                 Building A Greener Industrial Future.
               </h2>
               <p className="mt-6 max-w-md text-base leading-relaxed text-white/85">
-                Recycling, responsible sourcing and sustainable manufacturing
-                aren't side initiatives — they're how we build every product.
+                Recycling, responsible sourcing and sustainable manufacturing aren't side
+                initiatives — they're how we build every product.
               </p>
               <Link
                 to="/sustainability"
@@ -496,9 +623,18 @@ function Process() {
 /* ---------------- Testimonials ---------------- */
 function Testimonials() {
   const reviews = [
-    { q: "Filizat Metals' consistency in purity and delivery has transformed our supply chain.", a: "Procurement Director, Tier-1 Automotive" },
-    { q: "Their team treats sustainability with the same seriousness as quality. Rare and impressive.", a: "Head of Operations, Global Hardware Co." },
-    { q: "Premium-grade product, transparent pricing, and on-time every single shipment.", a: "Plant Manager, Specialty Alloys" },
+    {
+      q: "Filizat Metals' consistency in purity and delivery has transformed our supply chain.",
+      a: "Procurement Director, Tier-1 Automotive",
+    },
+    {
+      q: "Their team treats sustainability with the same seriousness as quality. Rare and impressive.",
+      a: "Head of Operations, Global Hardware Co.",
+    },
+    {
+      q: "Premium-grade product, transparent pricing, and on-time every single shipment.",
+      a: "Plant Manager, Specialty Alloys",
+    },
   ];
   const [idx, setIdx] = useState(0);
   useEffect(() => {
@@ -512,13 +648,13 @@ function Testimonials() {
         <div className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
           Trusted by leading manufacturers
         </div>
-        <div className="relative mt-10 min-h-[280px]">
+        <div className="relative mt-10 min-h-[320px] sm:min-h-[280px]">
           {reviews.map((r, i) => (
             <motion.div
               key={i}
               animate={{ opacity: i === idx ? 1 : 0, y: i === idx ? 0 : 20 }}
               transition={{ duration: 0.6 }}
-              className={`glass absolute inset-0 rounded-3xl p-10 shadow-soft sm:p-14 ${
+              className={`glass absolute inset-0 rounded-2xl p-6 shadow-soft sm:rounded-3xl sm:p-10 md:p-14 ${
                 i === idx ? "pointer-events-auto" : "pointer-events-none"
               }`}
             >
@@ -527,7 +663,7 @@ function Testimonials() {
                   <Star key={k} className="h-4 w-4 fill-foreground text-foreground" />
                 ))}
               </div>
-              <blockquote className="font-display text-2xl font-medium leading-snug tracking-tight text-foreground sm:text-3xl">
+              <blockquote className="font-display text-xl font-medium leading-snug tracking-tight text-foreground sm:text-2xl md:text-3xl">
                 "{r.q}"
               </blockquote>
               <div className="mt-6 text-sm text-muted-foreground">— {r.a}</div>
@@ -572,23 +708,24 @@ function CTA() {
         >
           <Award className="mx-auto h-10 w-10 text-graphite" />
           <h2 className="mt-6 font-display text-4xl font-semibold leading-tight tracking-tight text-graphite sm:text-5xl lg:text-6xl">
-            Looking for reliable<br />metal solutions?
+            Looking for reliable
+            <br />
+            metal solutions?
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base text-graphite/80">
-            Our team will help you specify, source and deliver the right material
-            for your project.
+            Our team will help you specify, source and deliver the right material for your project.
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:scale-105"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:scale-105 sm:w-auto"
             >
               Get a Quote
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-full border border-graphite/20 bg-white/60 px-7 py-3.5 text-sm font-medium text-graphite backdrop-blur transition-all hover:scale-105"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-graphite/20 bg-white/60 px-7 py-3.5 text-sm font-medium text-graphite backdrop-blur transition-all hover:scale-105 sm:w-auto"
             >
               Contact Us
             </Link>

@@ -2,15 +2,7 @@ import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  Send,
-  ArrowRight,
-  ChevronDown,
-} from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, ArrowRight, ChevronDown } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
@@ -53,7 +45,7 @@ function ContactHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.05 }}
-          className="mt-5 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
+          className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl"
         >
           Let's Start A<br />
           <span className="text-metal">Conversation.</span>
@@ -64,8 +56,8 @@ function ContactHero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
-          We're here to answer your questions and discuss your metal
-          requirements — from spec sheets to global delivery.
+          We're here to answer your questions and discuss your metal requirements — from spec sheets
+          to global delivery.
         </motion.p>
       </div>
     </section>
@@ -92,7 +84,11 @@ function ContactMain() {
             {[
               { icon: Phone, label: "Phone", value: "+91 98765 43210" },
               { icon: Mail, label: "Email", value: "hello@filizatmetals.com" },
-              { icon: MapPin, label: "Address", value: "GT Road, Near Industrial Area, Aligarh 202001, Uttar Pradesh, India" },
+              {
+                icon: MapPin,
+                label: "Address",
+                value: "GT Road, Near Industrial Area, Aligarh 202001, Uttar Pradesh, India",
+              },
               { icon: Clock, label: "Working Hours", value: "Mon – Sat · 9:00 AM – 7:00 PM IST" },
             ].map((c) => (
               <li key={c.label} className="flex items-start gap-4">
@@ -255,11 +251,26 @@ function MapSection() {
 
 function FAQ() {
   const items = [
-    { q: "Do you ship internationally?", a: "Yes — we ship to over 30 countries with full documentation, traceability and Incoterms of your choice." },
-    { q: "What's the minimum order quantity?", a: "MOQs vary by product category. Most refined metals start at one metric ton; please contact us for specifics." },
-    { q: "Can you supply custom specifications?", a: "Absolutely. Share your spec sheet or technical drawing and our engineering team will respond within 48 hours." },
-    { q: "How long does a typical quote take?", a: "Standard quotes return within one business day. Complex or custom-spec quotes may take up to 48 hours." },
-    { q: "Do you provide certificates of analysis?", a: "Every shipment includes a Mill Test Certificate and full COA where applicable." },
+    {
+      q: "Do you ship internationally?",
+      a: "Yes — we ship to over 30 countries with full documentation, traceability and Incoterms of your choice.",
+    },
+    {
+      q: "What's the minimum order quantity?",
+      a: "MOQs vary by product category. Most refined metals start at one metric ton; please contact us for specifics.",
+    },
+    {
+      q: "Can you supply custom specifications?",
+      a: "Absolutely. Share your spec sheet or technical drawing and our engineering team will respond within 48 hours.",
+    },
+    {
+      q: "How long does a typical quote take?",
+      a: "Standard quotes return within one business day. Complex or custom-spec quotes may take up to 48 hours.",
+    },
+    {
+      q: "Do you provide certificates of analysis?",
+      a: "Every shipment includes a Mill Test Certificate and full COA where applicable.",
+    },
   ];
   const [open, setOpen] = useState<number | null>(0);
   return (
@@ -308,9 +319,7 @@ function FAQ() {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <p className="px-6 pb-6 text-sm leading-relaxed text-muted-foreground">
-                    {it.a}
-                  </p>
+                  <p className="px-6 pb-6 text-sm leading-relaxed text-muted-foreground">{it.a}</p>
                 </div>
               </div>
             </motion.div>

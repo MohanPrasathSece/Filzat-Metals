@@ -168,75 +168,65 @@ function Hero() {
 /* ---------------- Video Section ---------------- */
 function VideoSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useState(true);   // starts muted (browser requirement)
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [soundEnabled, setSoundEnabled] = useState(false); // tracks if user has ever enabled sound
 
-  // Force autoplay on mount — works on all devices
+  // Autoplay on mount + resume when scrolled back into view
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    
-    // Explicitly set properties that are sometimes ignored by mobile browsers
-    video.defaultMuted = true;
+
     video.muted = true;
+    video.defaultMuted = true;
     video.playsInline = true;
 
     const tryPlay = () => {
-      video.play().catch(() => setIsPlaying(false));
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
     };
-    
-    video.addEventListener('loadeddata', tryPlay);
-    video.addEventListener('canplay', tryPlay);
-    
-    // Attempt immediately
+
+    // IntersectionObserver: play when visible, pause when hidden
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            tryPlay();
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    // Also try immediately
     tryPlay();
-    return () => {
-      video.removeEventListener('loadeddata', tryPlay);
-      video.removeEventListener('canplay', tryPlay);
-    };
+
+    return () => observer.disconnect();
   }, []);
 
-  // Unmute on first user interaction anywhere on the page
-  useEffect(() => {
-    const enableSound = () => {
-      const video = videoRef.current;
-      if (!video || soundEnabled) return;
-      video.muted = false;
-      setIsMuted(false);
-      setSoundEnabled(true);
-    };
-    document.addEventListener("click", enableSound, { once: true });
-    document.addEventListener("touchstart", enableSound, { once: true });
-    document.addEventListener("keydown", enableSound, { once: true });
-    return () => {
-      document.removeEventListener("click", enableSound);
-      document.removeEventListener("touchstart", enableSound);
-      document.removeEventListener("keydown", enableSound);
-    };
-  }, [soundEnabled]);
-
   const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
-      setSoundEnabled(true);
-    }
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setIsMuted(video.muted);
   };
 
   const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsPlaying(false);
     }
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-background">
+    <section ref={sectionRef} className="py-16 sm:py-24 bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-3xl text-center mb-12">
           <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
@@ -256,28 +246,14 @@ function VideoSection() {
             src={videoAsset}
             autoPlay
             muted
-            defaultMuted
             loop
             playsInline
+            preload="auto"
             className="h-full w-full object-cover"
           />
 
-          {/* Subtle dark overlay */}
-          <div className="absolute inset-0 bg-black/10 pointer-events-none" />
-
-          {/* "Tap for sound" hint — fades out once sound is enabled */}
-          {!soundEnabled && (
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm pointer-events-none select-none">
-              <svg className="h-3.5 w-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
-                <path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              Tap anywhere for sound
-            </div>
-          )}
-
-          {/* Controls — always visible */}
+          {/* Controls */}
           <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex gap-2 sm:gap-3">
-            {/* Play/Pause */}
             <button
               onClick={togglePlay}
               className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/95 text-graphite shadow-soft backdrop-blur hover:scale-105 active:scale-95 transition-transform cursor-pointer"
@@ -295,7 +271,6 @@ function VideoSection() {
               )}
             </button>
 
-            {/* Mute/Unmute */}
             <button
               onClick={toggleMute}
               className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/95 text-graphite shadow-soft backdrop-blur hover:scale-105 active:scale-95 transition-transform cursor-pointer"

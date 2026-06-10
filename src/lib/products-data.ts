@@ -8,41 +8,40 @@ import brassImg from "@/assets/product-brass.jpg";
 
 // AI-generated unique product images
 import zincDrossImg from "@/assets/product-zinc-dross.png";
-import zincBlocksImg from "@/assets/product-zinc-blocks.png";
 import manganeseFlakesImg from "@/assets/product-manganese-flakes.png";
 import micaFlakesImg from "@/assets/product-mica-flakes.png";
 import aluminiumBriquettesImg from "@/assets/product-aluminium-briquettes.png";
 import aluminiumBilletsImg from "@/assets/product-aluminium-billets.png";
 
-// Unique Unsplash images for brass sub-products and others
-const BRASS_HEX_RODS =
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"; // copper/brass rods
-const BRASS_WIRE =
-  "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&q=80"; // wire spool
-const BLANK_KEYS =
-  "https://images.unsplash.com/photo-1558618047-f4e20b7be0c4?w=800&q=80"; // keys
+// User-provided real product photos
+import ecoBrassIngotsImg from "@/assets/eco_brass_ingots.png";
+import zincBlocksImg from "@/assets/zinc_blocks.png";
+import refinedLeadIngotsImg from "@/assets/refined_lead_ingots.png";
+import brassHexRodsImg from "@/assets/brass_hex_rods.png";
+import brassWireImg from "@/assets/brasswires.png";
+import blankKeysImg from "@/assets/blank_keys.png";
+
+// Unsplash fallbacks for remaining brass sub-products
 const PADLOCKS =
-  "https://images.unsplash.com/photo-1573155993874-d5d48af862ba?w=800&q=80"; // padlock
+  "https://images.unsplash.com/photo-1573155993874-d5d48af862ba?w=800&q=80";
 const DEADBOLTS =
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&crop=entropy"; // door hardware
+  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&crop=entropy";
 const CYLINDER_LOCKS =
-  "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=800&q=80"; // lock cylinder
+  "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=800&q=80";
 const TRUMPET_VALVES =
-  "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=800&q=80"; // brass instrument
+  "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=800&q=80";
 const SAX_KEYS =
-  "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80"; // saxophone
+  "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80";
 const MOUTHPIECES =
-  "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80"; // instrument close-up
+  "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80";
 const TUBING_BRACKETS =
-  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"; // construction hardware
+  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80";
 const CABINET_PULLS =
-  "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80"; // cabinet hardware
+  "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80";
 const DOOR_HINGES =
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&sat=-50"; // hinges
+  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&sat=-50";
 const WINDOW_LATCHES =
-  "https://images.unsplash.com/photo-1467533003447-e295ff1b0435?w=800&q=80"; // window hardware
-const ECO_BRASS_INGOTS =
-  "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80"; // metal ingots
+  "https://images.unsplash.com/photo-1467533003447-e295ff1b0435?w=800&q=80";
 
 export type Product = {
   id: string;
@@ -73,7 +72,7 @@ export const categories: Category[] = [
         id: "eco-brass-ingots",
         name: "Eco-Brass Ingots",
         category: "Silicon",
-        image: ECO_BRASS_INGOTS,
+        image: ecoBrassIngotsImg,
         description:
           "Lead-free, silicon-based brass alloy ingots offering exceptional machinability and corrosion resistance for sustainable manufacturing.",
         applications: [
@@ -146,7 +145,7 @@ export const categories: Category[] = [
         id: "refined-lead-ingots",
         name: "Refined Lead Ingots",
         category: "Lead",
-        image: leadImg,
+        image: refinedLeadIngotsImg,
         description:
           "Ultra-refined 99.97% pure lead ingots, produced under strict quality control for battery, radiation shielding and alloying applications.",
         applications: [
@@ -287,7 +286,7 @@ export const categories: Category[] = [
         id: "brass-hex-rods",
         name: "Brass Hex Rods",
         category: "Brass",
-        image: BRASS_HEX_RODS,
+        image: brassHexRodsImg,
         description:
           "Precision-drawn hexagonal brass rods with consistent dimensions and superior machinability.",
         applications: ["Fasteners", "Valves", "Electrical fittings", "Decorative hardware"],
@@ -301,7 +300,7 @@ export const categories: Category[] = [
         id: "brass-wires",
         name: "Brass Wires",
         category: "Brass",
-        image: BRASS_WIRE,
+        image: brassWireImg,
         description:
           "High-tensile brass wires drawn to tight tolerances for industrial and decorative applications.",
         applications: ["Springs", "Fasteners", "Jewelry", "Electrical contacts"],
@@ -315,7 +314,7 @@ export const categories: Category[] = [
         id: "blank-keys",
         name: "Blank Keys",
         category: "Brass · Security",
-        image: BLANK_KEYS,
+        image: blankKeysImg,
         description: "Solid brass key blanks precision-cut for OEM and locksmith requirements.",
         applications: ["Locksmiths", "OEM lock makers", "Security hardware"],
         specs: [

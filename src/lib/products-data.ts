@@ -20,28 +20,18 @@ import refinedLeadIngotsImg from "@/assets/refined_lead_ingots.png";
 import brassHexRodsImg from "@/assets/brass_hex_rods.png";
 import brassWireImg from "@/assets/brasswires.png";
 import blankKeysImg from "@/assets/blank_keys.png";
+import padlocksImg from "@/assets/padlocks_brass.png";
+import deadboltsImg from "@/assets/structuraldeadbolts.png";
 
-// Unsplash fallbacks for remaining brass sub-products
-const PADLOCKS =
-  "https://images.unsplash.com/photo-1573155993874-d5d48af862ba?w=800&q=80";
-const DEADBOLTS =
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&crop=entropy";
-const CYLINDER_LOCKS =
-  "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=800&q=80";
-const TRUMPET_VALVES =
-  "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=800&q=80";
-const SAX_KEYS =
-  "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80";
-const MOUTHPIECES =
-  "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80";
-const TUBING_BRACKETS =
-  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80";
-const CABINET_PULLS =
-  "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80";
-const DOOR_HINGES =
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&sat=-50";
-const WINDOW_LATCHES =
-  "https://images.unsplash.com/photo-1467533003447-e295ff1b0435?w=800&q=80";
+// User-provided real product photos for remaining brass sub-products
+import cylinderLocksImg from "@/assets/cylinder_locks.png";
+import trumpetValvesImg from "@/assets/trumpet_valves.png";
+import saxophoneKeysImg from "@/assets/saxophone.png";
+import mouthpiecesImg from "@/assets/mouthpiece.png";
+import structuralTubingBracketsImg from "@/assets/structural_blocks.png";
+import cabinetPullsImg from "@/assets/brass_cabinet_pulls.png";
+import doorHingesImg from "@/assets/door_hinge.png";
+import heavyWindowLatchesImg from "@/assets/brass_heavy_window_latches.png";
 
 export type Product = {
   id: string;
@@ -326,7 +316,7 @@ export const categories: Category[] = [
         id: "padlocks",
         name: "Padlocks",
         category: "Brass · Security",
-        image: PADLOCKS,
+        image: padlocksImg,
         description: "Solid brass padlocks built for durability and weather resistance.",
         applications: ["Gates", "Lockers", "Industrial security"],
         specs: [
@@ -338,7 +328,7 @@ export const categories: Category[] = [
         id: "structural-deadbolts",
         name: "Structural Deadbolts",
         category: "Brass · Security",
-        image: DEADBOLTS,
+        image: deadboltsImg,
         description: "Heavy-duty deadbolts engineered for residential and commercial security.",
         applications: ["Doors", "Commercial buildings", "Residential"],
         specs: [
@@ -350,7 +340,7 @@ export const categories: Category[] = [
         id: "standard-cylinder-locks",
         name: "Standard Cylinder Locks",
         category: "Brass · Security",
-        image: CYLINDER_LOCKS,
+        image: cylinderLocksImg,
         description: "Pin-tumbler cylinder locks built from precision-machined brass.",
         applications: ["Doors", "Cabinets", "Lockers"],
         specs: [
@@ -362,7 +352,7 @@ export const categories: Category[] = [
         id: "trumpet-valves",
         name: "Trumpet Valves",
         category: "Brass · Musical",
-        image: TRUMPET_VALVES,
+        image: trumpetValvesImg,
         description: "Precision-machined valve assemblies for professional brass instruments.",
         applications: ["Musical instruments", "OEM brass instruments"],
         specs: [
@@ -374,7 +364,7 @@ export const categories: Category[] = [
         id: "saxophone-keys",
         name: "Saxophone Keys",
         category: "Brass · Musical",
-        image: SAX_KEYS,
+        image: saxophoneKeysImg,
         description: "Ergonomically shaped saxophone keys for OEM instrument makers.",
         applications: ["Saxophones", "Wind instruments"],
         specs: [{ label: "Material", value: "Brass" }],
@@ -383,7 +373,7 @@ export const categories: Category[] = [
         id: "mouthpieces",
         name: "Mouthpieces",
         category: "Brass · Musical",
-        image: MOUTHPIECES,
+        image: mouthpiecesImg,
         description: "Acoustically tuned brass mouthpieces with smooth bore finishes.",
         applications: ["Trumpets", "Horns", "Wind instruments"],
         specs: [
@@ -395,7 +385,7 @@ export const categories: Category[] = [
         id: "structural-tubing-brackets",
         name: "Structural Tubing Brackets",
         category: "Brass · Architectural",
-        image: TUBING_BRACKETS,
+        image: structuralTubingBracketsImg,
         description: "Heavy-duty brass brackets engineered for architectural tubing systems.",
         applications: ["Railings", "Architecture", "Display systems"],
         specs: [{ label: "Load", value: "Heavy duty" }],
@@ -404,7 +394,7 @@ export const categories: Category[] = [
         id: "cabinet-pulls",
         name: "Cabinet Pulls",
         category: "Brass · Architectural",
-        image: CABINET_PULLS,
+        image: cabinetPullsImg,
         description: "Sculpted solid-brass cabinet pulls with premium hand-polished finishes.",
         applications: ["Furniture", "Kitchens", "Interior design"],
         specs: [{ label: "Material", value: "Solid Brass" }],
@@ -413,7 +403,7 @@ export const categories: Category[] = [
         id: "door-hinges",
         name: "Door Hinges",
         category: "Brass · Architectural",
-        image: DOOR_HINGES,
+        image: doorHingesImg,
         description: "Architectural-grade brass hinges for residential and commercial doors.",
         applications: ["Doors", "Cabinets", "Architecture"],
         specs: [{ label: "Material", value: "Solid Brass" }],
@@ -422,7 +412,7 @@ export const categories: Category[] = [
         id: "heavy-window-latches",
         name: "Heavy Window Latches",
         category: "Brass · Architectural",
-        image: WINDOW_LATCHES,
+        image: heavyWindowLatchesImg,
         description: "Robust solid-brass window latches built for premium fenestration systems.",
         applications: ["Windows", "Architecture"],
         specs: [{ label: "Material", value: "Solid Brass" }],

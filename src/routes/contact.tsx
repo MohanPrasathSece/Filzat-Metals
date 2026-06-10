@@ -84,7 +84,7 @@ function ContactMain() {
             {[
               { icon: Phone, label: "Phone", value: "+91 70601 81694", href: "tel:+917060181694" },
               { icon: Phone, label: "Phone 2", value: "+91 94525 30493", href: "tel:+919452530493" },
-              { icon: Mail, label: "Email", value: "hello@filizatmetals.com", href: "mailto:hello@filizatmetals.com" },
+              { icon: Mail, label: "Email", value: "info@filizatmetals.com", href: "mailto:info@filizatmetals.com" },
               {
                 icon: MapPin,
                 label: "Address",
@@ -133,60 +133,215 @@ function ContactMain() {
   );
 }
 
-function ContactForm() {
-  const [sent, setSent] = useState(false);
+/** Confirmation modal shown before the form is actually submitted */
+function ConfirmModal({
+  data,
+  onConfirm,
+  onCancel,
+  sending,
+}: {
+  data: Record<string, string>;
+  onConfirm: () => void;
+  onCancel: () => void;
+  sending: boolean;
+}) {
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        const data = Object.fromEntries(new FormData(form).entries());
-        fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        })
-          .then((res) => res.json())
-          .then((json) => {
-            setSent(json.success);
-            setTimeout(() => setSent(false), 4000);
-          })
-          .catch(() => {
-            setSent(false);
-          });
-      }}
-      className="rounded-3xl border border-border bg-card p-8 shadow-soft sm:p-10"
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ backdropFilter: "blur(8px)", backgroundColor: "rgba(0,0,0,0.55)" }}
+      onClick={onCancel}
     >
-      <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Name" name="name" required />
-        <Field label="Email" name="email" type="email" required />
-        <Field label="Phone" name="phone" />
-        <Field label="Company Name" name="company" />
-        <div className="sm:col-span-2">
-          <Field label="Subject" name="subject" required />
-        </div>
-        <div className="sm:col-span-2">
-          <label className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Message
-          </label>
-          <textarea
-            name="message"
-            required
-            rows={5}
-            maxLength={1000}
-            className="mt-2 w-full resize-none rounded-2xl border border-border bg-secondary/40 px-5 py-4 text-sm outline-none transition-all focus:border-foreground/40 focus:bg-card"
-            placeholder="Tell us about your project, quantities, specifications…"
-          />
-        </div>
-      </div>
-      <button
-        type="submit"
-        className="group mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:scale-[1.03] hover:shadow-elevated"
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92, y: 24 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.92, y: 24 }}
+        transition={{ type: "spring", stiffness: 340, damping: 28 }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-elevated"
       >
-        {sent ? "Thank you - we'll be in touch" : "Send Message"}
-        <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-      </button>
-    </form>
+        {/* Icon */}
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl silver-gradient shadow-soft">
+          <Send className="h-6 w-6 text-graphite" />
+        </div>
+
+        <h3 className="mt-5 text-center font-display text-xl font-semibold tracking-tight">
+          Ready to send?
+        </h3>
+        <p className="mt-1 text-center text-sm text-muted-foreground">
+          Please confirm your message details before we send it.
+        </p>
+
+        {/* Details summary */}
+        <ul className="mt-6 space-y-2 rounded-2xl border border-border bg-secondary/40 px-5 py-4 text-sm">
+          {[
+            { label: "Name", val: data.name },
+            { label: "Email", val: data.email },
+            { label: "Phone", val: data.phone },
+            { label: "Company", val: data.company },
+            { label: "Subject", val: data.subject },
+          ]
+            .filter((r) => r.val)
+            .map((r) => (
+              <li key={r.label} className="flex justify-between gap-3">
+                <span className="font-medium uppercase tracking-widest text-muted-foreground text-xs pt-0.5">
+                  {r.label}
+                </span>
+                <span className="text-right text-foreground">{r.val}</span>
+              </li>
+            ))}
+          {data.message && (
+            <li className="mt-1 border-t border-border pt-3">
+              <span className="block font-medium uppercase tracking-widest text-muted-foreground text-xs mb-1">
+                Message
+              </span>
+              <span className="block text-foreground leading-relaxed line-clamp-4">
+                {data.message}
+              </span>
+            </li>
+          )}
+        </ul>
+
+        {/* Actions */}
+        <div className="mt-6 flex gap-3">
+          <button
+            type="button"
+            onClick={onCancel}
+            disabled={sending}
+            className="flex-1 rounded-full border border-border bg-secondary/60 px-5 py-3 text-sm font-medium text-foreground transition-all hover:bg-secondary disabled:opacity-50"
+          >
+            Go back
+          </button>
+          <motion.button
+            type="button"
+            onClick={onConfirm}
+            disabled={sending}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex flex-1 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-soft transition-colors disabled:opacity-60"
+          >
+            {sending ? (
+              <>
+                <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Sending…
+              </>
+            ) : (
+              <>
+                Confirm & Send
+                <Send className="h-4 w-4" />
+              </>
+            )}
+          </motion.button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function ContactForm() {
+  const [pendingData, setPendingData] = useState<Record<string, string> | null>(null);
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+    setPendingData(data);
+  };
+
+  const handleConfirm = () => {
+    if (!pendingData) return;
+    setSending(true);
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(pendingData),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setSending(false);
+        setPendingData(null);
+        setSent(json.success);
+        setTimeout(() => setSent(false), 5000);
+      })
+      .catch(() => {
+        setSending(false);
+        setPendingData(null);
+      });
+  };
+
+  return (
+    <>
+      {/* Confirmation modal */}
+      {pendingData && (
+        <ConfirmModal
+          data={pendingData}
+          onConfirm={handleConfirm}
+          onCancel={() => setPendingData(null)}
+          sending={sending}
+        />
+      )}
+
+      <form
+        onSubmit={handleSubmit}
+        className="rounded-3xl border border-border bg-card p-8 shadow-soft sm:p-10"
+      >
+        <div className="grid gap-5 sm:grid-cols-2">
+          <Field label="Name" name="name" required />
+          <Field label="Email" name="email" type="email" required />
+          <Field label="Phone" name="phone" />
+          <Field label="Company Name" name="company" />
+          <div className="sm:col-span-2">
+            <Field label="Subject" name="subject" required />
+          </div>
+          <div className="sm:col-span-2">
+            <label className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+              Message
+            </label>
+            <textarea
+              name="message"
+              required
+              rows={5}
+              maxLength={1000}
+              className="mt-2 w-full resize-none rounded-2xl border border-border bg-secondary/40 px-5 py-4 text-sm outline-none transition-all focus:border-foreground/40 focus:bg-card"
+              placeholder="Tell us about your project, quantities, specifications…"
+            />
+          </div>
+        </div>
+
+        {/* Animated Send Message button */}
+        <motion.button
+          type="submit"
+          whileHover={{ scale: 1.06, boxShadow: "0 8px 30px rgba(0,0,0,0.18)" }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ type: "spring", stiffness: 400, damping: 22 }}
+          className="group mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground"
+        >
+          {sent ? (
+            <>
+              ✓ Thank you — we'll be in touch
+            </>
+          ) : (
+            <>
+              Send Message
+              <motion.span
+                className="inline-flex"
+                animate={{ x: [0, 3, 0] }}
+                transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+              >
+                <Send className="h-4 w-4" />
+              </motion.span>
+            </>
+          )}
+        </motion.button>
+      </form>
+    </>
   );
 }
 
@@ -221,7 +376,7 @@ function Field({
 function QuickCards() {
   const cards = [
     { icon: Phone, t: "Call Us", d: "+91 70601 81694" },
-    { icon: Mail, t: "Email Us", d: "hello@filizatmetals.com" },
+    { icon: Mail, t: "Email Us", d: "info@filizatmetals.com" },
     { icon: ArrowRight, t: "Request Quote", d: "Fast turnaround in 24h" },
     { icon: MapPin, t: "Visit Us", d: "Aligarh, Uttar Pradesh" },
   ];

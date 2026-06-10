@@ -133,17 +133,13 @@ function ContactMain() {
   );
 }
 
-/** Confirmation modal shown before the form is actually submitted */
-function ConfirmModal({
-  data,
-  onConfirm,
-  onCancel,
-  sending,
+/** Result modal shown after the form is submitted */
+function ResultModal({
+  success,
+  onClose,
 }: {
-  data: Record<string, string>;
-  onConfirm: () => void;
-  onCancel: () => void;
-  sending: boolean;
+  success: boolean;
+  onClose: () => void;
 }) {
   return (
     <motion.div
@@ -152,7 +148,7 @@ function ConfirmModal({
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       style={{ backdropFilter: "blur(8px)", backgroundColor: "rgba(0,0,0,0.55)" }}
-      onClick={onCancel}
+      onClick={onClose}
     >
       <motion.div
         initial={{ opacity: 0, scale: 0.92, y: 24 }}
@@ -160,131 +156,81 @@ function ConfirmModal({
         exit={{ opacity: 0, scale: 0.92, y: 24 }}
         transition={{ type: "spring", stiffness: 340, damping: 28 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-elevated"
+        className="relative w-full max-w-sm rounded-3xl border border-border bg-card p-8 shadow-elevated text-center"
       >
         {/* Icon */}
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl silver-gradient shadow-soft">
-          <Send className="h-6 w-6 text-graphite" />
+        <div
+          className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full ${
+            success ? "bg-emerald-500/15" : "bg-red-500/15"
+          }`}
+        >
+          {success ? (
+            <svg className="h-8 w-8 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          ) : (
+            <svg className="h-8 w-8 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          )}
         </div>
 
-        <h3 className="mt-5 text-center font-display text-xl font-semibold tracking-tight">
-          Ready to send?
+        <h3 className="mt-5 font-display text-xl font-semibold tracking-tight">
+          {success ? "Message Sent!" : "Something went wrong"}
         </h3>
-        <p className="mt-1 text-center text-sm text-muted-foreground">
-          Please confirm your message details before we send it.
+        <p className="mt-2 text-sm text-muted-foreground">
+          {success
+            ? "Thank you — we'll be in touch within one business day."
+            : "We couldn't deliver your message. Please try again or email us directly."}
         </p>
 
-        {/* Details summary */}
-        <ul className="mt-6 space-y-2 rounded-2xl border border-border bg-secondary/40 px-5 py-4 text-sm">
-          {[
-            { label: "Name", val: data.name },
-            { label: "Email", val: data.email },
-            { label: "Phone", val: data.phone },
-            { label: "Company", val: data.company },
-            { label: "Subject", val: data.subject },
-          ]
-            .filter((r) => r.val)
-            .map((r) => (
-              <li key={r.label} className="flex justify-between gap-3">
-                <span className="font-medium uppercase tracking-widest text-muted-foreground text-xs pt-0.5">
-                  {r.label}
-                </span>
-                <span className="text-right text-foreground">{r.val}</span>
-              </li>
-            ))}
-          {data.message && (
-            <li className="mt-1 border-t border-border pt-3">
-              <span className="block font-medium uppercase tracking-widest text-muted-foreground text-xs mb-1">
-                Message
-              </span>
-              <span className="block text-foreground leading-relaxed line-clamp-4">
-                {data.message}
-              </span>
-            </li>
-          )}
-        </ul>
-
-        {/* Actions */}
-        <div className="mt-6 flex gap-3">
-          <button
-            type="button"
-            onClick={onCancel}
-            disabled={sending}
-            className="flex-1 rounded-full border border-border bg-secondary/60 px-5 py-3 text-sm font-medium text-foreground transition-all hover:bg-secondary disabled:opacity-50"
-          >
-            Go back
-          </button>
-          <motion.button
-            type="button"
-            onClick={onConfirm}
-            disabled={sending}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className="flex flex-1 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-soft transition-colors disabled:opacity-60"
-          >
-            {sending ? (
-              <>
-                <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-                </svg>
-                Sending…
-              </>
-            ) : (
-              <>
-                Confirm & Send
-                <Send className="h-4 w-4" />
-              </>
-            )}
-          </motion.button>
-        </div>
+        <motion.button
+          type="button"
+          onClick={onClose}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          className="mt-6 w-full rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-soft"
+        >
+          {success ? "Done" : "Close"}
+        </motion.button>
       </motion.div>
     </motion.div>
   );
 }
 
 function ContactForm() {
-  const [pendingData, setPendingData] = useState<Record<string, string> | null>(null);
   const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [result, setResult] = useState<"success" | "error" | null>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
-    setPendingData(data);
-  };
-
-  const handleConfirm = () => {
-    if (!pendingData) return;
     setSending(true);
     fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(pendingData),
+      body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((json) => {
         setSending(false);
-        setPendingData(null);
-        setSent(json.success);
-        setTimeout(() => setSent(false), 5000);
+        setResult(json.success ? "success" : "error");
+        if (json.success) form.reset();
       })
       .catch(() => {
         setSending(false);
-        setPendingData(null);
+        setResult("error");
       });
   };
 
   return (
     <>
-      {/* Confirmation modal */}
-      {pendingData && (
-        <ConfirmModal
-          data={pendingData}
-          onConfirm={handleConfirm}
-          onCancel={() => setPendingData(null)}
-          sending={sending}
+      {/* Result modal shown after submission */}
+      {result !== null && (
+        <ResultModal
+          success={result === "success"}
+          onClose={() => setResult(null)}
         />
       )}
 
@@ -315,17 +261,22 @@ function ContactForm() {
           </div>
         </div>
 
-        {/* Animated Send Message button */}
+        {/* Send Message button */}
         <motion.button
           type="submit"
-          whileHover={{ scale: 1.06, boxShadow: "0 8px 30px rgba(0,0,0,0.18)" }}
-          whileTap={{ scale: 0.97 }}
+          disabled={sending}
+          whileHover={sending ? {} : { scale: 1.06, boxShadow: "0 8px 30px rgba(0,0,0,0.18)" }}
+          whileTap={sending ? {} : { scale: 0.97 }}
           transition={{ type: "spring", stiffness: 400, damping: 22 }}
-          className="group mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground"
+          className="group mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground disabled:opacity-70"
         >
-          {sent ? (
+          {sending ? (
             <>
-              ✓ Thank you — we'll be in touch
+              <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+              </svg>
+              Sending…
             </>
           ) : (
             <>

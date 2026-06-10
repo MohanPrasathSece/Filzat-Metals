@@ -195,7 +195,7 @@ function SustainabilityPage() {
                     initial={{ opacity: 0, x: isEven ? -40 : 40 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, cubicBezier: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     className={`lg:col-span-6 ${!isEven ? "lg:order-2" : ""}`}
                   >
                     <div className="relative group overflow-hidden rounded-[2rem] shadow-elevated border border-border bg-card">

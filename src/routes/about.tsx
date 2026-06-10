@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
@@ -14,18 +13,52 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import facilityImg from "@/assets/about-facility.jpg";
-import ctaBg from "@/assets/cta-metal-bg.png";
+import { SEO } from "@/components/SEO";
+import facilityImg from "@/assets/about/about-facility.jpg";
+import ctaBg from "@/assets/shared/cta-metal-bg.png";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-function AboutPage() {
-  useEffect(() => {
-    document.title = "About Filizat Metals - Generations of Sourcing Excellence";
-  }, []);
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "https://filizatmetals.com/about#webpage",
+      "url": "https://filizatmetals.com/about",
+      "name": "About Filizat Metals - Legacy of Sourcing Excellence",
+      "description": "Learn about the history, values, and global exporting operations of Filizat Metals, a multi-generational wholesale metal supplier headquartered in Aligarh, India.",
+      "breadcrumb": {
+        "@id": "https://filizatmetals.com/about#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://filizatmetals.com/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://filizatmetals.com/about#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://filizatmetals.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About Us",
+          "item": "https://filizatmetals.com/about"
+        }
+      ]
+    }
+  ]
+};
 
+function AboutPage() {
   const pillars = [
     {
       icon: Scale,
@@ -69,6 +102,12 @@ function AboutPage() {
 
   return (
     <div className="overflow-x-hidden bg-background">
+      <SEO
+        title="About Filizat Metals - Generations of Sourcing Excellence"
+        description="Evolving from a traditional casting foundry into a modernized global logistics aggregator, Filizat Metals bridges the gap between heavy industrial production and global manufacturing demands."
+        canonicalPath="/about"
+        schema={aboutSchema}
+      />
       <Navbar />
 
       {/* Hero Header */}

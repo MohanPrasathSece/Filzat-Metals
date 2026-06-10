@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
@@ -15,22 +14,53 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import blueprintImg from "@/assets/WhatsApp Image 2026-06-09 at 16.12.45.jpeg";
-import aluminumImg from "@/assets/product-aluminium.jpg";
-import brassImg from "@/assets/product-brass.jpg";
-import manganeseImg from "@/assets/product-manganese.jpg";
-import siliconImg from "@/assets/product-silicon.jpg";
-import ctaBg from "@/assets/cta-metal-bg.png";
+import { SEO } from "@/components/SEO";
+import blueprintImg from "@/assets/sustainability/sustainability-blueprint.jpeg";
+import aluminumImg from "@/assets/products/aluminium-category.jpg";
+import brassImg from "@/assets/products/brass-category.jpg";
+import manganeseImg from "@/assets/products/manganese-category.jpg";
+import siliconImg from "@/assets/products/silicon-category.jpg";
+import ctaBg from "@/assets/shared/cta-metal-bg.png";
 
 export const Route = createFileRoute("/sustainability")({
   component: SustainabilityPage,
 });
 
-function SustainabilityPage() {
-  useEffect(() => {
-    document.title = "Sustainability Blueprint - Filizat Metals - Circular & Ethical Metallurgy";
-  }, []);
+const sustainabilitySchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://filizatmetals.com/sustainability#webpage",
+      "url": "https://filizatmetals.com/sustainability",
+      "name": "Sustainability Blueprint & Ethical Metallurgy - Filizat Metals",
+      "description": "Explore Filizat Metals' commitment to green metallurgy, closed-loop circular economy for brass alloys, clean hydropower sourcing for aluminum, and ethical supply chain audits.",
+      "breadcrumb": {
+        "@id": "https://filizatmetals.com/sustainability#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://filizatmetals.com/sustainability#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://filizatmetals.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sustainability",
+          "item": "https://filizatmetals.com/sustainability"
+        }
+      ]
+    }
+  ]
+};
 
+function SustainabilityPage() {
   const offerings = [
     {
       icon: Leaf,
@@ -72,6 +102,12 @@ function SustainabilityPage() {
 
   return (
     <div className="overflow-x-hidden bg-background animate-fade-in">
+      <SEO
+        title="Sustainability Blueprint - Circular & Ethical Metallurgy | Filizat Metals"
+        description="In the modern industrial landscape, foundational materials must coexist with environmental stewardship. Learn about our responsible sourcing and low-impact production models."
+        canonicalPath="/sustainability"
+        schema={sustainabilitySchema}
+      />
       <Navbar />
 
       {/* Hero Header */}

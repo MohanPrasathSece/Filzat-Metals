@@ -16,26 +16,104 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { categories } from "@/lib/products-data";
-import heroImg from "@/assets/herobg.png";
-import facilityImg from "@/assets/about-facility.jpg";
-import sustainImg from "@/assets/sustainability.jpg";
-import ctaBg from "@/assets/cta-metal-bg.png";
-import whyChooseUsImg from "@/assets/why-choose-us.png";
-import videoAsset from "@/assets/VID-20260609-WA0010.mp4";
-import gstCert from "@/assets/GST_Registration-Certificate.png";
-import importExportCert from "@/assets/Imported-Exported-code.png";
+import heroImg from "@/assets/home/home-hero.png";
+import facilityImg from "@/assets/about/about-facility.jpg";
+import sustainImg from "@/assets/sustainability/sustainability-hero.jpg";
+import ctaBg from "@/assets/shared/cta-metal-bg.png";
+import whyChooseUsImg from "@/assets/home/why-choose-us.png";
+import videoAsset from "@/assets/home/operational-showcase.mp4";
+import gstCert from "@/assets/home/gst-certificate.png";
+import importExportCert from "@/assets/home/import-export-certificate.png";
 export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://filizatmetals.com/#website",
+      "url": "https://filizatmetals.com/",
+      "name": "Filizat Metals",
+      "description": "Global Wholesale Metal Sourcing & Supply Company",
+      "publisher": {
+        "@id": "https://filizatmetals.com/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://filizatmetals.com/#organization",
+      "name": "Filizat Metals",
+      "url": "https://filizatmetals.com/",
+      "logo": "https://filizatmetals.com/favicon.svg",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+91-70601-81694",
+          "contactType": "sales",
+          "areaServed": "worldwide",
+          "availableLanguage": ["en", "hi"]
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "+91-94525-30493",
+          "contactType": "customer support",
+          "areaServed": "worldwide",
+          "availableLanguage": ["en", "hi"]
+        }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://filizatmetals.com/#localbusiness",
+      "name": "Filizat Metals",
+      "image": "https://filizatmetals.com/favicon.svg",
+      "telephone": "+91-70601-81694",
+      "email": "info@filizatmetals.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "E 303 Central Tower, Kela Nagar Chauraha",
+        "addressLocality": "Aligarh",
+        "addressRegion": "Uttar Pradesh",
+        "postalCode": "202001",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "27.8824",
+        "longitude": "78.0833"
+      },
+      "url": "https://filizatmetals.com/",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "19:00"
+      }
+    }
+  ]
+};
+
 function HomePage() {
-  useEffect(() => {
-    document.title = "Filizat Metals - Generations of Sourcing Excellence";
-  }, []);
-    const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
   return (
     <div className="overflow-x-hidden bg-background">
+      <SEO
+        title="Filizat Metals — Global Wholesale Metal Sourcing & Supply"
+        description="Based in Aligarh, India, Filizat Metals is a leading wholesale supplier and global sourcing aggregator of high-purity unbranded base metals, eco-brass, and sustainable industrial minerals."
+        canonicalPath=""
+        schema={homeSchema}
+      />
       <Navbar />
       <Hero />
       <VideoSection />

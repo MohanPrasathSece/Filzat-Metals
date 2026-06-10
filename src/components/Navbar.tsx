@@ -2,7 +2,7 @@ import { Link, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoImg from "@/assets/image copy.png";
+import logoImg from "@/assets/logo/logo.png";
 
 const links = [
   { to: "/", label: "Home" },

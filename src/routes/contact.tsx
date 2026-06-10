@@ -1,21 +1,107 @@
-import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Phone, Mail, MapPin, Clock, Send, ArrowRight, ChevronDown } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://filizatmetals.com/contact#webpage",
+      "url": "https://filizatmetals.com/contact",
+      "name": "Contact Filizat Metals - Sourcing & Support Inquiry",
+      "description": "Get in touch with the sales and support team of Filizat Metals. Inquire about pricing, specifications, shipping options, or custom orders for industrial metals.",
+      "breadcrumb": {
+        "@id": "https://filizatmetals.com/contact#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://filizatmetals.com/#localbusiness"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://filizatmetals.com/contact#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://filizatmetals.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://filizatmetals.com/contact"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://filizatmetals.com/contact#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you ship internationally?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes - we ship to over 30 countries with full documentation, traceability and Incoterms of your choice."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the minimum order quantity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MOQs vary by product category. Most refined metals start at one metric ton; please contact us for specifics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you supply custom specifications?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. Share your spec sheet or technical drawing and our engineering team will respond within 48 hours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a typical quote take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard quotes return within one business day. Complex or custom-spec quotes may take up to 48 hours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide certificates of analysis?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every shipment includes a Mill Test Certificate and full COA where applicable."
+          }
+        }
+      ]
+    }
+  ]
+};
+
 function ContactPage() {
-  useEffect(() => {
-    document.title = "Contact Filizat Metals - Let's Start a Conversation";
-  }, []);
   return (
     <div className="overflow-x-hidden bg-background">
+      <SEO
+        title="Contact Filizat Metals - Let's Start a Conversation"
+        description="We're here to answer your questions and discuss your metal requirements - from spec sheets to global delivery. Our team typically responds within one business day."
+        canonicalPath="/contact"
+        schema={contactSchema}
+      />
       <Navbar />
       <ContactHero />
       <ContactMain />

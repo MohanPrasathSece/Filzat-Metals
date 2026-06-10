@@ -4,22 +4,84 @@ import { useEffect, useState } from "react";
 import { ArrowRight, X, CheckCircle2, ChevronDown, Sparkles } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { categories, type Product } from "@/lib/products-data";
-import heroImg from "@/assets/minimal-hero.png";
-import ctaBg from "@/assets/cta-metal-bg.png";
-import industrialMetalsImg from "@/assets/industrial-metals.png";
+import heroImg from "@/assets/products/products-hero.png";
+import ctaBg from "@/assets/shared/cta-metal-bg.png";
+import industrialMetalsImg from "@/assets/products/quality-metals.png";
 
 export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
+const productsSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://filizatmetals.com/products#webpage",
+      "url": "https://filizatmetals.com/products",
+      "name": "Premium Metal Products & Solutions Catalog - Filizat Metals",
+      "description": "Browse the wholesale industrial metals catalog of Filizat Metals, featuring SHG zinc blocks, lead-free eco-brass ingots, refined lead ingots, electrolytic manganese flakes, micronized mica powder, aluminium billets, and brass hardware components.",
+      "breadcrumb": {
+        "@id": "https://filizatmetals.com/products#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://filizatmetals.com/products#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://filizatmetals.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Products",
+          "item": "https://filizatmetals.com/products"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://filizatmetals.com/products#itemlist",
+      "name": "Filizat Metals Industrial Product Portfolio",
+      "numberOfItems": categories.flatMap((cat) => cat.products).length,
+      "itemListElement": categories.flatMap((cat) => cat.products).map((prod, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "Product",
+          "name": prod.name,
+          "description": prod.description,
+          "category": prod.category,
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "INR",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "description": "Competitive Indian market rates based on volume and specifications"
+            }
+          }
+        }
+      }))
+    }
+  ]
+};
+
 function ProductsPage() {
   const [active, setActive] = useState<Product | null>(null);
-  useEffect(() => {
-    document.title = "Products - Premium Metal Solutions | Filizat Metals";
-  }, []);
   return (
     <div className="overflow-x-hidden bg-background">
+      <SEO
+        title="Products Catalog — Premium Metal Solutions | Filizat Metals"
+        description="Explore Filizat Metals' catalog of high-purity unbranded base metals, secondary raw materials, eco-brass, and precision hardware alloys at competitive market rates."
+        canonicalPath="/products"
+        schema={productsSchema}
+      />
       <Navbar />
       <Hero />
       <CategoryNav />

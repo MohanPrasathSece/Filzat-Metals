@@ -1,37 +1,37 @@
-import siliconImg from "@/assets/product-silicon.jpg";
-import zincImg from "@/assets/product-zinc.jpg";
-import leadImg from "@/assets/product-lead.jpg";
-import manganeseImg from "@/assets/product-manganese.jpg";
-import micaImg from "@/assets/product-mica.jpg";
-import aluminiumImg from "@/assets/product-aluminium.jpg";
-import brassImg from "@/assets/product-brass.jpg";
+import siliconImg from "@/assets/products/silicon-category.jpg";
+import zincImg from "@/assets/products/zinc-category.jpg";
+import leadImg from "@/assets/products/lead-category.jpg";
+import manganeseImg from "@/assets/products/manganese-category.jpg";
+import micaImg from "@/assets/products/mica-category.jpg";
+import aluminiumImg from "@/assets/products/aluminium-category.jpg";
+import brassImg from "@/assets/products/brass-category.jpg";
 
 // AI-generated unique product images
-import zincDrossImg from "@/assets/product-zinc-dross.png";
-import manganeseFlakesImg from "@/assets/product-manganese-flakes.png";
-import micaFlakesImg from "@/assets/product-mica-flakes.png";
-import aluminiumBriquettesImg from "@/assets/product-aluminium-briquettes.png";
-import aluminiumBilletsImg from "@/assets/product-aluminium-billets.png";
+import zincDrossImg from "@/assets/products/zinc-dross.png";
+import manganeseFlakesImg from "@/assets/products/manganese-flakes.png";
+import micaFlakesImg from "@/assets/products/mica-flakes.png";
+import aluminiumBriquettesImg from "@/assets/products/aluminium-briquettes.png";
+import aluminiumBilletsImg from "@/assets/products/aluminium-billets.png";
 
 // User-provided real product photos
-import ecoBrassIngotsImg from "@/assets/eco_brass_ingots.png";
-import zincBlocksImg from "@/assets/zinc_blocks.png";
-import refinedLeadIngotsImg from "@/assets/refined_lead_ingots.png";
-import brassHexRodsImg from "@/assets/brass_hex_rods.png";
-import brassWireImg from "@/assets/brasswires.png";
-import blankKeysImg from "@/assets/blank_keys.png";
-import padlocksImg from "@/assets/padlocks_brass.png";
-import deadboltsImg from "@/assets/structuraldeadbolts.png";
+import ecoBrassIngotsImg from "@/assets/products/eco-brass-ingots.png";
+import zincBlocksImg from "@/assets/products/zinc-blocks.png";
+import refinedLeadIngotsImg from "@/assets/products/refined-lead-ingots.png";
+import brassHexRodsImg from "@/assets/products/brass-hex-rods.png";
+import brassWireImg from "@/assets/products/brass-wires.png";
+import blankKeysImg from "@/assets/products/blank-keys.png";
+import padlocksImg from "@/assets/products/padlocks.png";
+import deadboltsImg from "@/assets/products/structural-deadbolts.png";
 
 // User-provided real product photos for remaining brass sub-products
-import cylinderLocksImg from "@/assets/cylinder_locks.png";
-import trumpetValvesImg from "@/assets/trumpet_valves.png";
-import saxophoneKeysImg from "@/assets/saxophone.png";
-import mouthpiecesImg from "@/assets/mouthpiece.png";
-import structuralTubingBracketsImg from "@/assets/structural_blocks.png";
-import cabinetPullsImg from "@/assets/brass_cabinet_pulls.png";
-import doorHingesImg from "@/assets/door_hinge.png";
-import heavyWindowLatchesImg from "@/assets/brass_heavy_window_latches.png";
+import cylinderLocksImg from "@/assets/products/cylinder-locks.png";
+import trumpetValvesImg from "@/assets/products/trumpet-valves.png";
+import saxophoneKeysImg from "@/assets/products/saxophone-keys.png";
+import mouthpiecesImg from "@/assets/products/mouthpieces.png";
+import structuralTubingBracketsImg from "@/assets/products/structural-tubing-brackets.png";
+import cabinetPullsImg from "@/assets/products/cabinet-pulls.png";
+import doorHingesImg from "@/assets/products/door-hinges.png";
+import heavyWindowLatchesImg from "@/assets/products/heavy-window-latches.png";
 
 export type Product = {
   id: string;

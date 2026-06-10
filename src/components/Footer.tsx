@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Globe, Mail } from "lucide-react";
-import logoImg from "@/assets/image copy.png";
+import logoImg from "@/assets/logo/logo.png";
 
 export function Footer() {
   return (
